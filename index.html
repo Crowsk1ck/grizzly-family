@@ -274,7 +274,7 @@ padding:70px 6%;
 <div class="hero">
 <h1>GRIZZLY FAMILY</h1>
 <p>Premium GTA 5 RP Organization</p>
-<a class="btn" href="https://discord.gg/XyMajdNZpm">JOIN DISCORD</a>
+<a class="btn" href="https://discord.com/invite/XyMajdNZpm">JOIN DISCORD</a>
 </div>
 </header>
 
@@ -347,13 +347,33 @@ document.getElementById('loader').style.display='none';
 },2500);
 };
 
+
 document.getElementById('form').addEventListener('submit', async(e)=>{
 e.preventDefault();
 
-const webhook = "https://discord.com/api/webhooks/1505925243259195403/9yhv5e8iUtygDsguUeozDMLIMhCiWLP056zqQhycTr8aGJaxfuXkEIsaqWBBMEikJzv7";
+const inputs = document.querySelectorAll('input, textarea');
 
-alert("Application sent!");
+const data = {
+content:
+`📩 Новая заявка в Grizzly Family
+
+👤 Nick: ${inputs[0].value}
+💬 Discord: ${inputs[1].value}
+📝 Причина:
+${inputs[2].value}`
+};
+
+await fetch("https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0",{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify(data)
 });
+
+alert("Заявка отправлена в Discord!");
+});
+
 </script>
 
 </body>
