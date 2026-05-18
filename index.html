@@ -453,6 +453,20 @@ alert("Ошибка подключения!");
 }
 
 });
+
+const music = document.getElementById('bgmusic');
+const musicBtn = document.getElementById('musicBtn');
+
+musicBtn.addEventListener('click', ()=>{
+if(music.paused){
+music.play();
+musicBtn.innerHTML = '🔊 MUSIC';
+}else{
+music.pause();
+musicBtn.innerHTML = '🔇 MUTED';
+}
+});
+
 </script>
 
 </body>
