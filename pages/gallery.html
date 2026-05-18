@@ -15,56 +15,36 @@ overflow-x:hidden;
 padding-top:90px;
 }
 
+
 nav{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 display:flex;
-justify-content:space-between;
 align-items:center;
-padding:18px 5%;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(10px);
-z-index:999;
+gap:12px;
+padding:12px 14px;
+overflow:hidden;
 }
 
 .logo{
-font-size:26px;
-font-weight:bold;
-color:#ff004c;
+font-size:20px !important;
+white-space:nowrap;
 flex-shrink:0;
-margin-right:15px;
 }
-
 
 .menu{
 display:flex !important;
-gap:10px !important;
-align-items:center !important;
+flex-direction:row !important;
 flex-wrap:nowrap !important;
 overflow-x:auto !important;
-scrollbar-width:none !important;
+overflow-y:hidden !important;
+gap:8px !important;
 width:100% !important;
-}
-
-.menu::-webkit-scrollbar{
-display:none !important;
-}
-
-.menu a{
-white-space:nowrap !important;
-flex-shrink:0 !important;
-}
-
-.menu{
-display:flex;
-gap:10px;
-align-items:center;
-flex-wrap:nowrap;
-overflow-x:auto;
+padding-bottom:4px;
+-ms-overflow-style:none;
 scrollbar-width:none;
-width:100%;
 }
 
 .menu::-webkit-scrollbar{
@@ -72,21 +52,10 @@ display:none;
 }
 
 .menu a{
-white-space:nowrap;
-text-decoration:none;
-color:white;
-padding:10px 16px;
-border-radius:10px;
-background:#111;
-flex-shrink:0;
-}
-
-.menu a:hover{
-background:#ff004c;
-}
-
-.container{
-padding:40px 8%;
+white-space:nowrap !important;
+font-size:14px !important;
+padding:8px 12px !important;
+flex:0 0 auto !important;
 }
 
 .title{
