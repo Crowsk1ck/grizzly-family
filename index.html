@@ -3,17 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRIZZLY FAMILY | Ultimate GTA RP</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Grizzly Family | Premium GTA RP</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-scroll-behavior:smooth;
 }
 
 body{
@@ -21,32 +17,6 @@ font-family:Arial,sans-serif;
 background:#050505;
 color:white;
 overflow-x:hidden;
-}
-
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
-video{
-position:fixed;
-right:0;
-bottom:0;
-min-width:100%;
-min-height:100%;
-object-fit:cover;
-filter:brightness(.25);
-z-index:-2;
-}
-
-.overlay{
-position:fixed;
-width:100%;
-height:100%;
-background:linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.9));
-z-index:-1;
 }
 
 .loader{
@@ -57,70 +27,46 @@ background:black;
 display:flex;
 justify-content:center;
 align-items:center;
+z-index:9999;
 flex-direction:column;
-z-index:99999;
 transition:1s;
 }
 
 .loader h1{
-font-size:72px;
+font-size:60px;
 color:#ff004c;
-text-shadow:0 0 30px #ff004c;
+text-shadow:0 0 20px #ff004c;
 animation:pulse 1.5s infinite;
 }
 
-.loader-bar{
-width:300px;
-height:8px;
-background:#111;
-border-radius:10px;
+.loader p{
 margin-top:20px;
-overflow:hidden;
-}
-
-.loader-fill{
-height:100%;
-width:0%;
-background:#ff004c;
-animation:load 3s linear forwards;
-}
-
-@keyframes load{
-to{width:100%;}
+color:#aaa;
 }
 
 @keyframes pulse{
-50%{opacity:.5;}
+0%{opacity:.5;}
+50%{opacity:1;}
+100%{opacity:.5;}
 }
 
-nav{
+video{
 position:fixed;
-top:0;
+right:0;
+bottom:0;
+min-width:100%;
+min-height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(.3);
+}
+
+.overlay{
+position:fixed;
 width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-backdrop-filter:blur(10px);
-background:rgba(0,0,0,.3);
-z-index:999;
-}
-
-.logo{
-font-size:30px;
-font-weight:bold;
-color:#ff004c;
-}
-
-.menu a{
-margin-left:20px;
-text-decoration:none;
-color:white;
-transition:.3s;
-}
-
-.menu a:hover{
-color:#ff004c;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.9));
+z-index:-1;
 }
 
 header{
@@ -132,36 +78,65 @@ text-align:center;
 padding:20px;
 }
 
-.hero{
-transform:translateY(-20px);
-}
-
 .hero h1{
-font-size:96px;
+font-size:90px;
+letter-spacing:5px;
 color:#ff004c;
-text-shadow:0 0 35px #ff004c;
+text-shadow:0 0 25px #ff004c;
 }
 
 .hero p{
 margin-top:20px;
-font-size:26px;
+font-size:24px;
+color:#ddd;
 }
 
 .btn{
 display:inline-block;
-margin-top:30px;
-padding:18px 40px;
+margin-top:35px;
+padding:18px 45px;
 border-radius:14px;
 background:#ff004c;
 text-decoration:none;
 color:white;
 font-weight:bold;
 transition:.3s;
-box-shadow:0 0 20px rgba(255,0,76,.6);
+box-shadow:0 0 20px rgba(255,0,76,.5);
 }
 
 .btn:hover{
 transform:scale(1.05);
+box-shadow:0 0 35px rgba(255,0,76,.9);
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.3);
+backdrop-filter:blur(10px);
+z-index:100;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#ff004c;
+}
+
+.menu a{
+margin-left:25px;
+text-decoration:none;
+color:white;
+transition:.3s;
+}
+
+.menu a:hover{
+color:#ff004c;
 }
 
 section{
@@ -174,55 +149,43 @@ margin-bottom:35px;
 color:#ff004c;
 }
 
+.card{
+background:rgba(20,20,20,.8);
+border:1px solid rgba(255,255,255,.05);
+padding:35px;
+border-radius:20px;
+backdrop-filter:blur(8px);
+box-shadow:0 0 25px rgba(255,0,76,.1);
+}
+
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
 }
 
-.card{
-background:rgba(20,20,20,.75);
+.member{
 padding:30px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,.05);
+border-radius:18px;
+background:#101010;
+border:1px solid #1e1e1e;
 transition:.3s;
 }
 
-.card:hover{
+.member:hover{
 transform:translateY(-5px);
-box-shadow:0 0 25px rgba(255,0,76,.25);
-}
-
-.stats{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.stat{
-flex:1;
-min-width:220px;
-background:#101010;
-padding:30px;
-border-radius:18px;
-text-align:center;
-}
-
-.stat h2{
-font-size:46px;
-color:#ff004c;
+border-color:#ff004c;
 }
 
 .gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
 .gallery img{
 width:100%;
-border-radius:20px;
+border-radius:18px;
 transition:.3s;
 }
 
@@ -230,75 +193,41 @@ transition:.3s;
 transform:scale(1.03);
 }
 
-.phone{
-width:300px;
-margin:auto;
-background:#111;
-border-radius:35px;
-padding:20px;
-border:3px solid #222;
-box-shadow:0 0 30px rgba(255,0,76,.25);
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-.app{
-background:#1a1a1a;
-padding:15px;
-margin-top:10px;
-border-radius:14px;
-}
-
-.shop-item{
-background:#111;
-padding:20px;
-border-radius:18px;
-text-align:center;
-}
-
-.shop-item h3{
-margin-bottom:15px;
-}
-
-.buy{
-display:inline-block;
-margin-top:15px;
-padding:12px 25px;
-background:#ff004c;
+input, textarea{
+padding:16px;
+border:none;
 border-radius:12px;
-text-decoration:none;
+background:#111;
 color:white;
 }
 
-.discord-widget{
-background:#111;
-padding:20px;
-border-radius:20px;
-text-align:center;
-}
-
-footer{
-padding:40px;
-text-align:center;
-background:#070707;
-color:#666;
-}
-
-#musicBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-padding:14px 22px;
+button{
+padding:16px;
 border:none;
 border-radius:12px;
 background:#ff004c;
 color:white;
+font-weight:bold;
 cursor:pointer;
-z-index:9999;
+}
+
+footer{
+padding:35px;
+text-align:center;
+background:#080808;
+color:#777;
 }
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:52px;
+font-size:48px;
 }
 
 .hero p{
@@ -315,6 +244,32 @@ padding:70px 6%;
 
 }
 
+.contract-link{
+text-decoration:none;
+color:white;
+display:block;
+transition:.3s;
+}
+
+.contract-link:hover{
+transform:scale(1.02);
+}
+
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:14px 22px;
+border:none;
+border-radius:12px;
+background:#ff004c;
+color:white;
+font-weight:bold;
+cursor:pointer;
+z-index:9999;
+}
+
 </style>
 </head>
 
@@ -322,13 +277,8 @@ padding:70px 6%;
 
 <div class="loader" id="loader">
 <h1>GRIZZLY FAMILY</h1>
-<div class="loader-bar">
-<div class="loader-fill"></div>
+<p>Loading GTA Online Session...</p>
 </div>
-<p style="margin-top:20px;color:#999;">Loading GTA Online Session...</p>
-</div>
-
-<canvas id="particles"></canvas>
 
 <video autoplay muted loop>
 <source src="background.mp4" type="video/mp4">
@@ -342,194 +292,168 @@ padding:70px 6%;
 
 <button id="musicBtn">🔊 MUSIC</button>
 
+
 <nav>
 <div class="logo">GRIZZLY</div>
 
 <div class="menu">
-<a href="#stats">Stats</a>
-<a href="#discord">Discord</a>
-<a href="#shop">Donate</a>
-<a href="#phone">Phone</a>
+<a href="#about">About</a>
+<a href="#team">Team</a>
+<a href="#gallery">Gallery</a>
+<a href="#contracts">Contracts</a>
 <a href="#apply">Apply</a>
-
 </div>
 </nav>
 
 <header>
-
 <div class="hero">
-
 <h1>GRIZZLY FAMILY</h1>
-
-<p>Ultimate GTA 5 RP Experience</p>
-
-<a class="btn" href="ragemp://connect/127.0.0.1:22005">PLAY NOW</a>
-
+<p>Premium GTA 5 RP Organization</p>
+<a class="btn" href="#apply">JOIN FAMILY</a>
 </div>
-
 </header>
 
-<section id="stats">
+<section id="about">
+<h2 class="title">ABOUT FAMILY</h2>
 
-<h2 class="title">LIVE SERVER STATS</h2>
-
-<div class="stats">
-
-<div class="stat">
-<h2 id="online">487</h2>
-<p>Players Online</p>
+<div class="card">
+Grizzly Family — premium криминальная организация в GTA 5 RP.
+Неон, стиль Rockstar Games, войны, бизнес, ограбления и настоящий RP.
 </div>
-
-<div class="stat">
-<h2>32</h2>
-<p>Ping</p>
-</div>
-
-<div class="stat">
-<h2>ONLINE</h2>
-<p>Server Status</p>
-</div>
-
-</div>
-
 </section>
 
-<section id="discord">
-
-<h2 class="title">DISCORD</h2>
-
-<div class="discord-widget">
-
-<iframe src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
-width="100%" height="500" allowtransparency="true"
-frameborder="0"></iframe>
-
-</div>
-
-</section>
-
-<section id="shop">
-
-<h2 class="title">DONATE STORE</h2>
+<section id="team">
+<h2 class="title">TEAM</h2>
 
 <div class="grid">
 
-<div class="shop-item">
-<h3>VIP PACKAGE</h3>
-<p>$10</p>
-<a class="buy" href="#">BUY</a>
+<div class="member">
+<h3>Leader</h3>
+<p>Maryana</p>
 </div>
 
-<div class="shop-item">
-<h3>RARE CAR</h3>
-<p>$25</p>
-<a class="buy" href="#">BUY</a>
+<div class="member">
+<h3>Deputy</h3>
+<p>Zim</p>
 </div>
 
-<div class="shop-item">
-<h3>MONEY PACK</h3>
-<p>$5</p>
-<a class="buy" href="#">BUY</a>
+<div class="member">
+<h3>Members</h3>
+<p>50+ Players</p>
 </div>
 
 </div>
-
-</section>
-
-<section id="blackmarket">
-
-<h2 class="title">BLACK MARKET</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Elite Contracts</h3>
-<p>Premium RP missions and operations.</p>
-</div>
-
-<div class="card">
-<h3>Underground Deals</h3>
-<p>Illegal market operations.</p>
-</div>
-
-<div class="card">
-<h3>Weapon Supply</h3>
-<p>Special RP weapon contracts.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="phone">
-
-<h2 class="title">GTA PHONE UI</h2>
-
-<div class="phone">
-
-<div class="app">📱 Contacts</div>
-<div class="app">💬 Messages</div>
-<div class="app">💰 Bank</div>
-<div class="app">🚗 Cars</div>
-<div class="app">🎯 Jobs</div>
-
-</div>
-
 </section>
 
 <section id="gallery">
-
-<h2 class="title">TIKTOK STYLE GALLERY</h2>
+<h2 class="title">GALLERY</h2>
 
 <div class="gallery">
-
 <img src="gallery1.jpg">
 <img src="gallery2.jpg">
 <img src="gallery3.jpg">
-
 </div>
-
 </section>
 
 
+<section id="contracts">
+<h2 class="title">CONTRACTS</h2>
 
+<div class="grid">
 
-<section id="apply">
+<a class="contract-link" href="https://discord.com/" target="_blank">
+<div class="member">
+<h3>Business Protection</h3>
+<p>Охрана бизнеса и сопровождение.</p>
+</div>
+</a>
 
-<h2 class="title">APPLICATION TO FAMILY</h2>
+<a class="contract-link" href="https://discord.com/" target="_blank">
+<div class="member">
+<h3>Elite Security</h3>
+<p>Защита VIP игроков и семей.</p>
+</div>
+</a>
 
-<div class="card">
-
-<form id="applicationForm">
-
-<input id="nick" type="text" placeholder="Ваш NickName" required>
-
-<input id="discordUser" type="text" placeholder="Ваш Discord" required>
-
-<textarea id="reason" placeholder="Почему хотите вступить"></textarea>
-
-<button type="submit">SEND APPLICATION</button>
-
-</form>
+<a class="contract-link" href="https://discord.com/" target="_blank">
+<div class="member">
+<h3>Special Operations</h3>
+<p>Контракты на специальные RP задания.</p>
+</div>
+</a>
 
 </div>
+</section>
 
+<section id="apply">
+<h2 class="title">APPLICATION</h2>
+
+<div class="card">
+<form id="form">
+<input type="text" placeholder="Ваш NickName" required>
+<input type="text" placeholder="Ваш Discord">
+<textarea placeholder="Почему хотите вступить"></textarea>
+<button type="submit">SEND APPLICATION</button>
+</form>
+</div>
 </section>
 
 <footer>
-© 2026 Grizzly Family • Ultimate GTA RP Website
+© 2026 Grizzly Family • Rockstar Style GTA RP Website
 </footer>
 
-<script>
 
-window.onload = ()=>{
+<script>
+window.onload = () =>{
 setTimeout(()=>{
 document.getElementById('loader').style.opacity='0';
 setTimeout(()=>{
 document.getElementById('loader').style.display='none';
 },1000);
-},3000);
+},2500);
 };
+
+const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
+
+document.getElementById('form').addEventListener('submit', async (e) => {
+e.preventDefault();
+
+const inputs = document.querySelectorAll('input, textarea');
+
+const payload = {
+content:
+`📩 Новая заявка в Grizzly Family
+
+👤 Nick: ${inputs[0].value}
+💬 Discord: ${inputs[1].value}
+
+📝 Причина:
+${inputs[2].value}`
+};
+
+try {
+
+const response = await fetch(webhookURL,{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body: JSON.stringify(payload)
+});
+
+if(response.ok){
+alert("Заявка отправлена в Discord!");
+document.getElementById('form').reset();
+}else{
+alert("Ошибка отправки webhook!");
+}
+
+}catch(error){
+console.error(error);
+alert("Ошибка подключения!");
+}
+
+});
 
 const music = document.getElementById('bgmusic');
 const musicBtn = document.getElementById('musicBtn');
@@ -542,104 +466,6 @@ musicBtn.innerHTML='🔊 MUSIC';
 music.pause();
 musicBtn.innerHTML='🔇 MUTED';
 }
-});
-
-setInterval(()=>{
-document.getElementById('online').innerHTML =
-Math.floor(Math.random()*300)+400;
-},5000);
-
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<100;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-d:Math.random()*1
-});
-}
-
-function draw(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle='rgba(255,0,76,.7)';
-
-for(let i=0;i<particles.length;i++){
-
-let p = particles[i];
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-ctx.fill();
-
-p.y += p.d;
-
-if(p.y > canvas.height){
-p.y = 0;
-}
-
-}
-
-requestAnimationFrame(draw);
-
-}
-
-draw();
-
-document.addEventListener('mousemove',(e)=>{
-document.querySelector('.hero').style.transform =
-`translate(${e.clientX/100}px, ${e.clientY/100}px)`;
-});
-
-
-const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
-
-document.getElementById('applicationForm').addEventListener('submit', async (e)=>{
-
-e.preventDefault();
-
-const payload = {
-content:
-`📩 Новая заявка в Grizzly Family
-
-👤 Nick: ${document.getElementById('nick').value}
-
-💬 Discord: ${document.getElementById('discordUser').value}
-
-📝 Причина:
-${document.getElementById('reason').value}`
-};
-
-try{
-
-const response = await fetch(webhookURL,{
-method:'POST',
-headers:{
-'Content-Type':'application/json'
-},
-body:JSON.stringify(payload)
-});
-
-if(response.ok){
-alert('Заявка отправлена!');
-document.getElementById('applicationForm').reset();
-}else{
-alert('Ошибка webhook!');
-}
-
-}catch(err){
-console.error(err);
-alert('Ошибка подключения!');
-}
-
 });
 
 </script>
