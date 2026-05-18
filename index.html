@@ -310,7 +310,7 @@ color:#ccc;
 <div class="authBox">
 <h1>GRIZZLY FAMILY</h1>
 <p>Авторизуйтесь через Discord</p>
-<a class="btn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=code&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
+<a class="btn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
 </div>
 </div>
 
@@ -349,7 +349,7 @@ color:#ccc;
 <div class="hero">
 <h1>GRIZZLY FAMILY</h1>
 <p></p>
-<a class="btn" id="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=code&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
+<a class="btn" id="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
 </div>
 </header>
 
@@ -439,6 +439,22 @@ Grizzly Family — сильна та амбітна сім’я. Відомі с
 </div>
 </section>
 
+
+<section id="profile">
+<h2 class="title">DISCORD PROFILE</h2>
+
+<div class="card" style="text-align:center;">
+
+<img id="discordAvatar"
+style="width:120px;height:120px;border-radius:50%;display:none;margin:auto;">
+
+<h2 id="discordName" style="margin-top:20px;"></h2>
+
+<p id="discordEmail"></p>
+
+</div>
+</section>
+
 <footer>
 • © 2026 Grizzly Family •
 </footer>
@@ -516,6 +532,7 @@ music.play();
 }, { once:true });
 
 
+
 const fragment = new URLSearchParams(window.location.hash.slice(1));
 const accessToken = fragment.get("access_token");
 
@@ -532,7 +549,19 @@ authorization:`Bearer ${accessToken}`
 })
 .then(res=>res.json())
 .then(user=>{
-console.log(user);
+
+document.getElementById('discordName').innerHTML =
+user.username;
+
+document.getElementById('discordEmail').innerHTML =
+user.email || '';
+
+const avatar =
+`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
+document.getElementById('discordAvatar').src = avatar;
+document.getElementById('discordAvatar').style.display = 'block';
+
 });
 
 }else if(localStorage.getItem("discord_token")){
@@ -544,6 +573,7 @@ document.getElementById('authOverlay').style.display = 'none';
 document.body.style.overflow='hidden';
 
 }
+
 
 </script>
 
