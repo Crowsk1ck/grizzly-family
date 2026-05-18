@@ -6,14 +6,15 @@
 <title>Заявка</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 body{
+margin:0;
 font-family:Arial,sans-serif;
-background:#050505;
+background:#000;
 color:white;
-padding-top:90px;
+padding-top:80px;
 overflow-x:hidden;
 }
+
 .bgvideo{
 position:fixed;
 inset:0;
@@ -23,12 +24,14 @@ object-fit:cover;
 z-index:-2;
 filter:brightness(.25);
 }
+
 .overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.65);
 z-index:-1;
 }
+
 nav{
 position:fixed;
 top:0;
@@ -37,12 +40,12 @@ width:100%;
 display:flex;
 gap:10px;
 padding:15px;
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.55);
 backdrop-filter:blur(10px);
 overflow-x:auto;
 z-index:999;
 }
-nav::-webkit-scrollbar{display:none}
+
 nav a{
 color:white;
 text-decoration:none;
@@ -51,96 +54,33 @@ background:#1b1b1b;
 border-radius:10px;
 white-space:nowrap;
 }
-nav a:hover{background:#ff004c}
-.container{padding:30px}
+
+.container{
+padding:30px;
+}
+
 .title{
 font-size:48px;
 color:#ff004c;
-margin-bottom:20px;
 }
-.card{
-background:rgba(20,20,20,.92);
-padding:25px;
-border-radius:16px;
-margin-bottom:20px;
-}
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-.gallery img{
-width:100%;
-border-radius:14px;
-}
-input,textarea{
-width:100%;
-padding:14px;
-margin-top:12px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-}
-.submitBtn,#musicBtn,#logoutBtn{
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
 padding:12px 16px;
 border:none;
 border-radius:10px;
 background:#ff004c;
 color:white;
 cursor:pointer;
-}
-.submitBtn{
-margin-top:15px;
-width:100%;
-font-weight:bold;
-}
-#musicBtn{
-position:fixed;
-bottom:20px;
-right:20px;
 z-index:9999;
-}
-#discordProfileBox{
-position:fixed;
-top:90px;
-right:20px;
-display:none;
-align-items:center;
-gap:12px;
-background:rgba(15,15,15,.95);
-padding:12px;
-border-radius:16px;
-z-index:9999;
-}
-#discordAvatar{
-width:52px;
-height:52px;
-border-radius:50%;
-border:2px solid #ff004c;
-}
-#authOverlay{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:10000;
-}
-.authBtn{
-display:inline-block;
-margin-top:20px;
-padding:14px 22px;
-border-radius:12px;
-background:#ff004c;
-color:white;
-text-decoration:none;
 }
 </style>
 
 </head>
 <body>
+
 
 <video class="bgvideo" autoplay muted loop>
 <source src="/grizzly-family/assets/media/background.mp4" type="video/mp4">
@@ -154,20 +94,39 @@ text-decoration:none;
 
 <button id="musicBtn">MUSIC</button>
 
-<div id="authOverlay">
-<div>
-<h1 style="color:#ff004c;text-align:center">GRIZZLY FAMILY</h1>
-<a class="authBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=identify%20email">LOGIN WITH DISCORD</a>
-</div>
-</div>
+<script>
+const music=document.getElementById('bgmusic');
+const video=document.querySelector('.bgvideo');
 
-<div id="discordProfileBox">
-<img id="discordAvatar">
-<div>
-<h4 id="discordName"></h4>
-<button id="logoutBtn">LOGOUT</button>
-</div>
-</div>
+if(localStorage.getItem('music_time')){
+music.currentTime=parseFloat(localStorage.getItem('music_time'));
+}
+
+if(localStorage.getItem('video_time')){
+video.currentTime=parseFloat(localStorage.getItem('video_time'));
+}
+
+document.addEventListener('click',()=>{
+music.play();
+},{once:true});
+
+music.addEventListener('timeupdate',()=>{
+localStorage.setItem('music_time',music.currentTime);
+});
+
+video.addEventListener('timeupdate',()=>{
+localStorage.setItem('video_time',video.currentTime);
+});
+
+document.getElementById('musicBtn').onclick=()=>{
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+};
+</script>
+
 
 <nav>
 <a href="/grizzly-family/index.html">Інфо</a>
@@ -178,174 +137,8 @@ text-decoration:none;
 </nav>
 
 <div class="container">
-
-<h1 class="title">APPLICATION</h1>
-
-<div class="card">
-
-<form id="appForm">
-
-<input id="nick" type="text" placeholder="NickName" required>
-
-<textarea id="reason" placeholder="Почему хотите вступить"></textarea>
-
-<button class="submitBtn" id="submitBtn" type="submit">
-SEND APPLICATION
-</button>
-
-</form>
-
+<h1 class="title">Заявка</h1>
 </div>
-
-<script>
-const webhook='https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0';
-
-if(localStorage.getItem('application_sent')){
-document.getElementById('submitBtn').disabled=true;
-document.getElementById('submitBtn').innerHTML='APPLICATION SENT';
-}
-
-document.getElementById('appForm').addEventListener('submit',async(e)=>{
-
-e.preventDefault();
-
-if(!localStorage.getItem('discord_token')){
-alert('Сначала войдите через Discord!');
-return;
-}
-
-if(localStorage.getItem('application_sent')){
-alert('Вы уже отправили APPLICATION!');
-return;
-}
-
-const payload={
-content:`📩 Новая заявка
-
-👤 Nick: ${document.getElementById('nick').value}
-
-💬 Discord: ${localStorage.getItem('discord_name')}
-
-📝 Причина:
-${document.getElementById('reason').value}`
-};
-
-const response=await fetch(webhook,{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify(payload)
-});
-
-if(response.ok){
-
-localStorage.setItem('application_sent','true');
-
-document.getElementById('submitBtn').disabled=true;
-document.getElementById('submitBtn').innerHTML='APPLICATION SENT';
-
-alert('APPLICATION отправлена!');
-
-}else{
-
-alert('Ошибка webhook!');
-
-}
-
-});
-</script>
-
-</div>
-
-
-<script>
-const music=document.getElementById('bgmusic');
-const video=document.querySelector('.bgvideo');
-
-if(localStorage.getItem('music_time')){
-music.currentTime=parseFloat(localStorage.getItem('music_time'));
-}
-if(localStorage.getItem('video_time')){
-video.currentTime=parseFloat(localStorage.getItem('video_time'));
-}
-
-music.addEventListener('timeupdate',()=>{
-localStorage.setItem('music_time',music.currentTime);
-});
-
-video.addEventListener('timeupdate',()=>{
-localStorage.setItem('video_time',video.currentTime);
-});
-
-document.addEventListener('click',()=>{
-music.play();
-},{once:true});
-
-document.getElementById('musicBtn').onclick=()=>{
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-};
-
-const fragment=new URLSearchParams(window.location.hash.substring(1));
-const token=fragment.get('access_token');
-
-async function loadProfile(tok){
-
-const response=await fetch('https://discord.com/api/users/@me',{
-headers:{authorization:`Bearer ${tok}`}
-});
-
-if(!response.ok){
-localStorage.clear();
-return;
-}
-
-const user=await response.json();
-
-localStorage.setItem('discord_token',tok);
-localStorage.setItem('discord_name',user.username);
-localStorage.setItem('discord_avatar',
-`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-);
-
-restoreProfile();
-
-}
-
-function restoreProfile(){
-
-const name=localStorage.getItem('discord_name');
-const avatar=localStorage.getItem('discord_avatar');
-
-if(name && avatar){
-
-document.getElementById('authOverlay').style.display='none';
-
-document.getElementById('discordProfileBox').style.display='flex';
-
-document.getElementById('discordName').innerHTML=name;
-
-document.getElementById('discordAvatar').src=avatar;
-
-}
-
-}
-
-if(token){
-window.location.hash='';
-loadProfile(token);
-}else if(localStorage.getItem('discord_token')){
-restoreProfile();
-}
-
-document.getElementById('logoutBtn').onclick=()=>{
-localStorage.clear();
-location.href='/grizzly-family/index.html';
-};
-</script>
-
 
 </body>
 </html>
