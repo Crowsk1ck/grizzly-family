@@ -14,21 +14,7 @@ color:#fff;
 overflow-x:hidden;
 padding-top:90px;
 }
-video.bg{
-position:fixed;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-filter:brightness(.25);
-}
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.65);
-z-index:-1;
-}
+
 nav{
 position:fixed;
 top:0;
@@ -37,157 +23,85 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 6%;
-background:rgba(0,0,0,.45);
+padding:18px 5%;
+background:rgba(0,0,0,.55);
 backdrop-filter:blur(10px);
 z-index:999;
 }
-.logo{font-size:28px;font-weight:bold;color:#ff004c}
-.menu{display:flex;gap:12px;flex-wrap:wrap}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#ff004c;
+flex-shrink:0;
+margin-right:15px;
+}
+
+
+.menu{
+display:flex !important;
+gap:10px !important;
+align-items:center !important;
+flex-wrap:nowrap !important;
+overflow-x:auto !important;
+scrollbar-width:none !important;
+width:100% !important;
+}
+
+.menu::-webkit-scrollbar{
+display:none !important;
+}
+
 .menu a{
-color:white;
+white-space:nowrap !important;
+flex-shrink:0 !important;
+}
+
+.menu{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:nowrap;
+overflow-x:auto;
+scrollbar-width:none;
+width:100%;
+}
+
+.menu::-webkit-scrollbar{
+display:none;
+}
+
+.menu a{
+white-space:nowrap;
 text-decoration:none;
+color:white;
 padding:10px 16px;
 border-radius:10px;
 background:#111;
+flex-shrink:0;
 }
-.menu a:hover{background:#ff004c}
-.container{padding:40px 8%}
-.title{font-size:48px;color:#ff004c;margin-bottom:25px}
-.card{
-background:rgba(17,17,17,.9);
-padding:30px;
-border-radius:18px;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-.member{
-background:#101010;
-padding:25px;
-border-radius:18px;
-}
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-.gallery img{width:100%;border-radius:16px}
-#musicBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-z-index:9999;
-padding:12px 18px;
-border:none;
-border-radius:12px;
+
+.menu a:hover{
 background:#ff004c;
-color:white;
-cursor:pointer;
 }
-#discordProfileBox{
-position:fixed;
-top:90px;
-right:20px;
-display:none;
-align-items:center;
-gap:12px;
-background:rgba(15,15,15,.95);
-padding:12px 16px;
-border-radius:16px;
-z-index:9999;
+
+.container{
+padding:40px 8%;
 }
-#discordAvatarTop{
-width:50px;
-height:50px;
-border-radius:50%;
-border:2px solid #ff004c;
-}
-#logoutBtn{
-margin-top:6px;
-padding:7px 12px;
-border:none;
-border-radius:10px;
-background:#ff004c;
-color:white;
-cursor:pointer;
-}
-#authOverlay{
-position:fixed;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#000;
-z-index:10000;
-}
-.authBox{text-align:center}
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:14px 26px;
-background:#ff004c;
-color:white;
-text-decoration:none;
-border-radius:12px;
-}
-input,textarea{
-width:100%;
-padding:15px;
-margin-top:14px;
-border:none;
-border-radius:12px;
-background:#1a1a1a;
-color:white;
-}
-button.submit{
-margin-top:14px;
-width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
-background:#ff004c;
-color:white;
-font-weight:bold;
-cursor:pointer;
+
+.title{
+font-size:48px;
+color:#ff004c;
+margin-bottom:25px;
 }
 </style>
 
 </head>
 <body>
 
-<video class="bg" autoplay muted loop>
-<source src="../assets/media/background.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
-
-<audio id="bgmusic" autoplay loop>
-<source src="../assets/media/music.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicBtn">🔊 MUSIC</button>
-
-<div id="authOverlay">
-<div class="authBox">
-<h1 style="color:#ff004c">GRIZZLY FAMILY</h1>
-<p style="margin-top:15px">Авторизуйтесь через Discord</p>
-<a class="btn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=identify%20email">LOGIN WITH DISCORD</a>
-</div>
-</div>
-
-<div id="discordProfileBox">
-<img id="discordAvatarTop">
-<div>
-<h4 id="discordNameTop"></h4>
-<button id="logoutBtn">LOGOUT</button>
-</div>
-</div>
-
 <nav>
 <div class="logo">GRIZZLY</div>
+
 <div class="menu">
 <a href="../index.html">Інфо</a>
 <a href="team.html">Команда</a>
@@ -198,105 +112,8 @@ cursor:pointer;
 </nav>
 
 <div class="container">
-<h1 class='title'>Галерея</h1><div class='gallery'><img src='../assets/images/gallery1.jpg'><img src='../assets/images/gallery2.jpg'><img src='../assets/images/gallery3.jpg'></div>
+<h1 class="title">Галерея</h1>
 </div>
-
-
-<script>
-const video = document.querySelector('.bg');
-const music = document.getElementById('bgmusic');
-
-if(video){
-const t = localStorage.getItem('video_time');
-if(t) video.currentTime = parseFloat(t);
-video.addEventListener('timeupdate', ()=>{
-localStorage.setItem('video_time', video.currentTime);
-});
-}
-
-if(music){
-const mt = localStorage.getItem('music_time');
-if(mt) music.currentTime = parseFloat(mt);
-
-document.addEventListener('click', ()=>{
-music.play();
-},{once:true});
-
-music.addEventListener('timeupdate', ()=>{
-localStorage.setItem('music_time', music.currentTime);
-});
-}
-
-document.getElementById('musicBtn').onclick = ()=>{
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-};
-
-const fragment = new URLSearchParams(window.location.hash.substring(1));
-const accessToken = fragment.get("access_token");
-
-async function loadProfile(token){
-
-try{
-
-const response = await fetch("https://discord.com/api/users/@me",{
-headers:{authorization:`Bearer ${token}`}
-});
-
-if(!response.ok){
-localStorage.clear();
-return;
-}
-
-const user = await response.json();
-
-const avatar = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-
-localStorage.setItem('discord_token', token);
-localStorage.setItem('discord_name', user.username);
-localStorage.setItem('discord_avatar', avatar);
-
-restoreProfile();
-
-}catch(err){
-console.error(err);
-}
-
-}
-
-function restoreProfile(){
-
-const name = localStorage.getItem('discord_name');
-const avatar = localStorage.getItem('discord_avatar');
-
-if(name && avatar){
-
-document.getElementById('authOverlay').style.display='none';
-document.getElementById('discordProfileBox').style.display='flex';
-
-document.getElementById('discordNameTop').innerHTML=name;
-document.getElementById('discordAvatarTop').src=avatar;
-
-}
-
-}
-
-if(accessToken){
-window.location.hash='';
-loadProfile(accessToken);
-}else if(localStorage.getItem('discord_token')){
-restoreProfile();
-}
-
-document.getElementById('logoutBtn').onclick=()=>{
-localStorage.clear();
-location.href='../index.html';
-};
-</script>
-
 
 </body>
 </html>
