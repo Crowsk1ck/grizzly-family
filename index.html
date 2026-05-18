@@ -468,6 +468,12 @@ musicBtn.innerHTML='🔇 MUTED';
 }
 });
 
+
+document.addEventListener('click', () => {
+const music = document.getElementById('bgmusic');
+music.play();
+}, { once:true });
+
 </script>
 
 </body>
