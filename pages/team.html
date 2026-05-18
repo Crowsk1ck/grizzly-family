@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grizzly</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#050505;
+color:white;
+padding-top:110px;
+overflow-x:hidden;
+}
+
+video{
+position:fixed;
+right:0;
+bottom:0;
+min-width:100%;
+min-height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(.25);
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+z-index:-1;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+background:rgba(0,0,0,.4);
+backdrop-filter:blur(10px);
+z-index:999;
+}
+
+.menu{display:flex;gap:15px;flex-wrap:wrap;}
+
+.menu a{
+text-decoration:none;
+color:white;
+padding:10px 18px;
+border-radius:12px;
+background:#111;
+}
+
+.container{padding:40px 10%;}
+
+.title{font-size:48px;color:#ff004c;}
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:#ff004c;
+color:white;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<video autoplay muted loop>
+<source src="../assets/media/background.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<audio id="bgmusic" autoplay loop>
+<source src="../assets/media/music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">🔊 MUSIC</button>
+
+<nav>
+
+<div>GRIZZLY</div>
+
+<div class="menu">
+
+<a href="../index.html">Інфо</a>
+<a href="team.html">Команда</a>
+<a href="gallery.html">Галерея</a>
+<a href="contracts.html">Контракти</a>
+<a href="apply.html">Заявка</a>
+
+</div>
+
+</nav>
+
+<div class="container">
+<h1 class='title'>Команда</h1>
+</div>
+
+<script>
+const music=document.getElementById('bgmusic');
+const musicBtn=document.getElementById('musicBtn');
+
+musicBtn.onclick=()=>{
+
+if(music.paused){
+music.play();
+musicBtn.innerHTML='🔊 MUSIC';
+}else{
+music.pause();
+musicBtn.innerHTML='🔇 MUTED';
+}
+
+};
+</script>
+
+<script src="../assets/js/media-persistence.js"></script>
+
+</body>
+</html>
