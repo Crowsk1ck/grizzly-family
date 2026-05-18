@@ -338,6 +338,20 @@ Grizzly Family — premium криминальная организация в GT
 </footer>
 
 <script>
+window.onload = () =>{
+setTimeout(()=>{
+document.getElementById('loader').style.opacity='0';
+setTimeout(()=>{
+document.getElementById('loader').style.display='none';
+},1000);
+},2500);
+};
+
+
+document.getElementById('form').addEventListener('submit', async(e)=>{
+e.preventDefault();
+
+const inputs = document.querySelectorAll('input, textarea');
 
 const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
 
