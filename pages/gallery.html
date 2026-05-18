@@ -11,8 +11,9 @@ margin:0;
 font-family:Arial,sans-serif;
 background:#0a0a0a;
 color:white;
-padding-top:80px;
+padding-top:90px;
 }
+
 nav{
 position:fixed;
 top:0;
@@ -24,6 +25,7 @@ padding:15px;
 background:#111;
 overflow-x:auto;
 }
+
 nav a{
 color:white;
 text-decoration:none;
@@ -32,9 +34,59 @@ background:#1b1b1b;
 border-radius:10px;
 white-space:nowrap;
 }
-h1{
+
+nav a:hover{
+background:#ff004c;
+}
+
+.container{
+padding:30px;
+}
+
+.title{
+font-size:48px;
 color:#ff004c;
-padding:20px;
+margin-bottom:20px;
+}
+
+.card{
+background:#151515;
+padding:25px;
+border-radius:16px;
+margin-bottom:20px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+border-radius:14px;
+}
+
+input,textarea{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:14px;
+width:100%;
+border:none;
+border-radius:10px;
+background:#ff004c;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 </style>
 
@@ -49,6 +101,17 @@ padding:20px;
 <a href="/grizzly-family/pages/apply.html">Заявка</a>
 </nav>
 
-<h1>Галерея</h1>
+
+<div class="container">
+<h1 class="title">Галерея</h1>
+
+<div class="gallery">
+<img src="../assets/images/gallery1.jpg">
+<img src="../assets/images/gallery2.jpg">
+<img src="../assets/images/gallery3.jpg">
+</div>
+
+</div>
+
 </body>
 </html>
