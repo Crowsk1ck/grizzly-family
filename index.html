@@ -350,7 +350,8 @@ padding:70px 6%;
 <a href="#discord">Discord</a>
 <a href="#shop">Donate</a>
 <a href="#phone">Phone</a>
-<a href="#admin">Admin</a>
+<a href="#apply">Apply</a>
+
 </div>
 </nav>
 
@@ -490,26 +491,26 @@ frameborder="0"></iframe>
 
 </section>
 
-<section id="admin">
 
-<h2 class="title">ADMIN PANEL</h2>
 
-<div class="grid">
 
-<div class="card">
-<h3>Applications</h3>
-<p>Manage family applications.</p>
-</div>
+<section id="apply">
+
+<h2 class="title">APPLICATION TO FAMILY</h2>
 
 <div class="card">
-<h3>Blacklist</h3>
-<p>Control banned players.</p>
-</div>
 
-<div class="card">
-<h3>Contracts</h3>
-<p>Manage RP operations.</p>
-</div>
+<form id="applicationForm">
+
+<input id="nick" type="text" placeholder="Ваш NickName" required>
+
+<input id="discordUser" type="text" placeholder="Ваш Discord" required>
+
+<textarea id="reason" placeholder="Почему хотите вступить"></textarea>
+
+<button type="submit">SEND APPLICATION</button>
+
+</form>
 
 </div>
 
@@ -596,6 +597,49 @@ draw();
 document.addEventListener('mousemove',(e)=>{
 document.querySelector('.hero').style.transform =
 `translate(${e.clientX/100}px, ${e.clientY/100}px)`;
+});
+
+
+const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
+
+document.getElementById('applicationForm').addEventListener('submit', async (e)=>{
+
+e.preventDefault();
+
+const payload = {
+content:
+`📩 Новая заявка в Grizzly Family
+
+👤 Nick: ${document.getElementById('nick').value}
+
+💬 Discord: ${document.getElementById('discordUser').value}
+
+📝 Причина:
+${document.getElementById('reason').value}`
+};
+
+try{
+
+const response = await fetch(webhookURL,{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify(payload)
+});
+
+if(response.ok){
+alert('Заявка отправлена!');
+document.getElementById('applicationForm').reset();
+}else{
+alert('Ошибка webhook!');
+}
+
+}catch(err){
+console.error(err);
+alert('Ошибка подключения!');
+}
+
 });
 
 </script>
