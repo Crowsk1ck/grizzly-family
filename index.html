@@ -304,7 +304,7 @@ color:#ccc;
 
 #discordProfileBox{
 position:fixed;
-top:20px;
+top:90px;
 right:20px;
 display:none;
 align-items:center;
@@ -338,6 +338,17 @@ font-size:12px;
 color:#999;
 }
 
+#logoutBtn{
+margin-top:10px;
+padding:8px 12px;
+border:none;
+border-radius:10px;
+background:#ff004c;
+color:white;
+cursor:pointer;
+font-size:12px;
+}
+
 </style>
 </head>
 
@@ -347,7 +358,7 @@ color:#999;
 <div class="authBox">
 <h1>GRIZZLY FAMILY</h1>
 <p>Авторизуйтесь через Discord</p>
-<a class="btn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
+<a class="btn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=code&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
 </div>
 </div>
 
@@ -376,6 +387,7 @@ color:#999;
 <div>
 <h4 id="discordNameTop"></h4>
 <p id="discordEmailTop"></p>
+<button id="logoutBtn">LOGOUT</button>
 </div>
 </div>
 
@@ -395,7 +407,7 @@ color:#999;
 <div class="hero">
 <h1>GRIZZLY FAMILY</h1>
 <p></p>
-<a class="btn" id="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
+<a class="btn" id="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=code&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=email+identify">LOGIN WITH DISCORD</a>
 </div>
 </header>
 
@@ -589,8 +601,9 @@ const avatar =
 document.getElementById('authOverlay').style.display = 'none';
 
 const loginBtn = document.getElementById('loginBtn');
+
 if(loginBtn){
-loginBtn.style.display = 'none';
+loginBtn.style.display='none';
 }
 
 document.getElementById('discordProfileBox').style.display='flex';
@@ -611,7 +624,8 @@ console.error(err);
 
 if(accessToken){
 
-window.location.hash = '';
+window.location.hash='';
+
 loadDiscordProfile(accessToken);
 
 }else{
@@ -629,6 +643,23 @@ document.body.style.overflow='hidden';
 }
 
 }
+
+document.addEventListener('click',()=>{
+
+const logoutBtn = document.getElementById('logoutBtn');
+
+if(logoutBtn){
+
+logoutBtn.onclick = () => {
+
+localStorage.clear();
+location.reload();
+
+};
+
+}
+
+});
 </script>
 
 </body>
