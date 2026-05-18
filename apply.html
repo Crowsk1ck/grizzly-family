@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Інфо</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Заявка</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
@@ -84,4 +84,14 @@ cursor:pointer;
 <a href="apply.html">Заявка</a>
 </div>
 </nav>
-<div class="container"><h1 class="title">Інфо</h1><div class="card">Grizzly Family — сильна та амбітна сім’я GTA 5 RP.</div></div></body></html>
+<div class="container"><h1 class="title">APPLICATION</h1><div class="card"><form id="form"><input type="text" placeholder="NickName"><input type="text" placeholder="Discord"><textarea placeholder="Почему хотите вступить"></textarea><button type="submit">SEND APPLICATION</button></form></div></div><script>
+const webhookURL="https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
+document.getElementById('form').addEventListener('submit',async(e)=>{
+e.preventDefault();
+if(localStorage.getItem('application_sent')){alert('APPLICATION уже отправлена!');return;}
+const i=document.querySelectorAll('input,textarea');
+const payload={content:`📩 Новая заявка\n\n👤 Nick: ${i[0].value}\n💬 Discord: ${i[1].value}\n\n📝 Причина:\n${i[2].value}`};
+const r=await fetch(webhookURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+if(r.ok){localStorage.setItem('application_sent','true');alert('APPLICATION отправлена!');}
+});
+</script></body></html>
