@@ -337,6 +337,7 @@ Grizzly Family — premium криминальная организация в GT
 © 2026 Grizzly Family • Rockstar Style GTA RP Website
 </footer>
 
+
 <script>
 window.onload = () =>{
 setTimeout(()=>{
@@ -347,48 +348,39 @@ document.getElementById('loader').style.display='none';
 },2500);
 };
 
+const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
 
-document.getElementById('form').addEventListener('submit', async(e)=>{
+document.getElementById('form').addEventListener('submit', async (e) => {
 e.preventDefault();
 
 const inputs = document.querySelectorAll('input, textarea');
-
-const webhookURL = "https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0";
-
-document.getElementById("form").addEventListener("submit", async function(e){
-
-e.preventDefault();
-
-const nick = document.getElementById("nick").value;
-const discord = document.getElementById("discord").value;
-const reason = document.getElementById("reason").value;
 
 const payload = {
 content:
 `📩 Новая заявка в Grizzly Family
 
-👤 Nick: ${nick}
-💬 Discord: ${discord}
+👤 Nick: ${inputs[0].value}
+💬 Discord: ${inputs[1].value}
 
 📝 Причина:
-${reason}`
+${inputs[2].value}`
 };
 
-try{
+try {
 
 const response = await fetch(webhookURL,{
-method:"POST",
+method:'POST',
 headers:{
-"Content-Type":"application/json"
+'Content-Type':'application/json'
 },
-body:JSON.stringify(payload)
+body: JSON.stringify(payload)
 });
 
 if(response.ok){
-alert("Заявка отправлена!");
-document.getElementById("form").reset();
+alert("Заявка отправлена в Discord!");
+document.getElementById('form').reset();
 }else{
-alert("Ошибка webhook!");
+alert("Ошибка отправки webhook!");
 }
 
 }catch(error){
@@ -397,7 +389,6 @@ alert("Ошибка подключения!");
 }
 
 });
-
 </script>
 
 </body>
