@@ -248,7 +248,7 @@ z-index:999;
 <input class="input" placeholder="Сума">
 <input class="input" placeholder="Учасники">
 
-<button class="btn">ДОДАТИ КОНТРАКТ</button>
+<button class="btn" onclick="sendContract()">ДОДАТИ КОНТРАКТ</button>
 
 </div>
 
@@ -349,6 +349,81 @@ document.getElementById('musicBtn').onclick=()=>{
 if(music.paused){music.play();}
 else{music.pause();}
 };
+
+async function sendContract(){
+
+const title =
+document.querySelectorAll('.input')[0].value;
+
+const amount =
+document.querySelectorAll('.input')[1].value;
+
+const members =
+document.querySelectorAll('.input')[2].value;
+
+if(!title || !amount || !members){
+
+alert('Заповни всі поля');
+
+return;
+
+}
+
+const payload = {
+
+embeds:[{
+
+title:'📄 НОВИЙ КОНТРАКТ',
+
+color:0xff004c,
+
+fields:[
+
+{
+name:'📌 Назва',
+value:title,
+inline:false
+},
+
+{
+name:'💰 Сума',
+value:amount,
+inline:true
+},
+
+{
+name:'👥 Учасники',
+value:members,
+inline:true
+}
+
+],
+
+footer:{
+text:'GRIZZLY FAMILY PANEL'
+},
+
+timestamp:new Date()
+
+}]
+
+};
+
+await fetch(
+'https://discord.com/api/webhooks/1506424883737788619/yATAISypU22ZWVvhRKMsSeSZT1l7bghWRvPSoLaERM8tdj1Wx70JXq4QU2DjYwiHC72F',
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify(payload)
+}
+);
+
+alert('Контракт відправлено в Discord');
+
+}
+
 </script>
 
 </body>
