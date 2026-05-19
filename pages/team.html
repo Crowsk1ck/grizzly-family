@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Команда</title>
+<title>team.html</title>
 
 <style>
 body{
@@ -12,7 +12,47 @@ font-family:Arial,sans-serif;
 background:#050505;
 color:white;
 padding-top:90px;
-overflow-x:hidden;
+}
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:center;
+gap:12px;
+padding:15px;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+}
+nav a{
+color:white;
+text-decoration:none;
+padding:10px 16px;
+background:#151515;
+border-radius:10px;
+}
+.container{
+padding:30px;
+max-width:1200px;
+margin:auto;
+}
+.title{
+font-size:48px;
+color:#ff004c;
+margin-bottom:25px;
+}
+.card{
+background:#121212;
+padding:25px;
+border-radius:16px;
+margin-bottom:20px;
+box-shadow:0 0 20px rgba(255,0,76,.15);
+}
+.infoBox{
+background:#1a1a1a;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
 }
 
 .bgvideo{
@@ -24,76 +64,12 @@ object-fit:cover;
 z-index:-2;
 filter:brightness(.25);
 }
-
 .overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.65);
 z-index:-1;
 }
-
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:15px 20px;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(10px);
-z-index:999;
-overflow-x:auto;
-gap:12px;
-}
-
-nav::-webkit-scrollbar{
-display:none;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-padding:10px 16px;
-background:#1b1b1b;
-border-radius:10px;
-white-space:nowrap;
-transition:.3s;
-}
-
-nav a:hover{
-background:#ff004c;
-transform:translateY(-2px);
-}
-
-.container{
-padding:30px;
-max-width:1200px;
-margin:auto;
-}
-
-.title{
-font-size:48px;
-color:#ff004c;
-margin-bottom:25px;
-}
-
-.card{
-background:#121212;
-padding:25px;
-border-radius:16px;
-margin-bottom:20px;
-box-shadow:0 0 20px rgba(255,0,76,.15);
-}
-
-.infoBox{
-background:#1a1a1a;
-padding:15px;
-border-radius:12px;
-margin-top:15px;
-}
-
 #musicBtn{
 position:fixed;
 bottom:20px;
@@ -106,7 +82,6 @@ color:white;
 cursor:pointer;
 z-index:9999;
 }
-
 #discordProfile{
 position:fixed;
 top:90px;
@@ -119,14 +94,12 @@ padding:12px;
 border-radius:14px;
 z-index:9999;
 }
-
 #discordAvatar{
 width:50px;
 height:50px;
 border-radius:50%;
 border:2px solid #ff004c;
 }
-
 #logoutBtn{
 padding:8px 12px;
 border:none;
@@ -136,7 +109,6 @@ color:white;
 cursor:pointer;
 margin-top:5px;
 }
-
 #authOverlay{
 position:fixed;
 inset:0;
@@ -146,7 +118,6 @@ align-items:center;
 background:#000;
 z-index:10000;
 }
-
 .loginBtn{
 display:inline-block;
 padding:14px 22px;
@@ -156,6 +127,7 @@ color:white;
 text-decoration:none;
 margin-top:20px;
 }
+
 </style>
 
 </head>
@@ -173,13 +145,6 @@ margin-top:20px;
 
 <button id="musicBtn">MUSIC</button>
 
-<div id="authOverlay">
-<div style="text-align:center">
-<h1 style="color:#ff004c">GRIZZLY FAMILY</h1>
-<a class="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fcrowsk1ck.github.io%2Fgrizzly-family&scope=identify%20email">LOGIN WITH DISCORD</a>
-</div>
-</div>
-
 <div id="discordProfile">
 <img id="discordAvatar">
 <div>
@@ -187,6 +152,14 @@ margin-top:20px;
 <button id="logoutBtn">LOGOUT</button>
 </div>
 </div>
+
+<div id="authOverlay">
+<div style="text-align:center">
+<h1 style="color:#ff004c">GRIZZLY FAMILY</h1>
+<a class="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fwww.grizzly-family.online%2F&scope=identify%20email">LOGIN WITH DISCORD</a>
+</div>
+</div>
+
 
 <nav>
 <a href="/index.html">Інфо</a>
@@ -197,119 +170,7 @@ margin-top:20px;
 </nav>
 
 <div class="container">
-
 <h1 class="title">Команда</h1>
-
-<div class="card">
-
-<h2 style="color:#ff004c;">
-⚡ GRIZZLY FAMILY
-</h2>
-
-<p style="
-margin-top:15px;
-line-height:1.8;
-color:#cfcfcf;
-">
-
-Основний склад та керівництво
-GRIZZLY FAMILY.
-Преміальна GTA 5 RP сім’я
-з активним ком’юніті
-та атмосферою Rockstar Games.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2 style="color:#ff004c;">
-👑 КЕРІВНИЦТВО
-</h2>
-
-<div class="infoBox">
-👑 Andrii Grizzly — OWNER
-</div>
-
-<div class="infoBox">
-💀 Maryana Grizzly — CO-OWNER
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 style="color:#ff004c;">
-🔥 ОСНОВНИЙ СКЛАД
-</h2>
-
-<div class="infoBox">
-🦅 Zim Neffiltrovanuyi — MAIN MEMBER
-</div>
-
-<div class="infoBox">
-⚔ WAR TEAM — ACTIVE FIGHTER
-</div>
-
-<div class="infoBox">
-🚘 DRIVER TEAM — FAMILY DRIVER
-</div>
-
-<div class="infoBox">
-🎯 RECRUIT TEAM — ACTIVE MEMBERS
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 style="color:#ff004c;">
-📊 FAMILY STATS
-</h2>
-
-<div class="infoBox">
-👥 ACTIVE MEMBERS — 20+
-</div>
-
-<div class="infoBox">
-🏆 RP LEVEL — HIGH
-</div>
-
-<div class="infoBox">
-⚔ FAMILY WARS — ACTIVE
-</div>
-
-<div class="infoBox">
-🔥 STATUS — TOP RP FAMILY
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 style="color:#ff004c;">
-🚀 FAMILY GOALS
-</h2>
-
-<div class="infoBox">
-✔ Territory Wars
-</div>
-
-<div class="infoBox">
-✔ Family Events
-</div>
-
-<div class="infoBox">
-✔ Premium RP Atmosphere
-</div>
-
-<div class="infoBox">
-✔ Strong Community
-</div>
-
-</div>
-
 </div>
 
 <script>
@@ -321,7 +182,6 @@ document.addEventListener('click',()=>{music.play();},{once:true});
 if(localStorage.getItem('music_time')){
 music.currentTime=parseFloat(localStorage.getItem('music_time'));
 }
-
 if(localStorage.getItem('video_time')){
 video.currentTime=parseFloat(localStorage.getItem('video_time'));
 }
@@ -339,7 +199,10 @@ if(music.paused){music.play();}else{music.pause();}
 };
 
 const fragment=new URLSearchParams(window.location.hash.substring(1));
-const token=fragment.get('access_token');
+const token =
+new URLSearchParams(
+window.location.hash.substring(1)
+).get('access_token');
 
 async function loadProfile(tok){
 const response=await fetch('https://discord.com/api/users/@me',{
