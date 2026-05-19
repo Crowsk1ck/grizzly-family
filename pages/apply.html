@@ -33,7 +33,19 @@ nav a{color:white;text-decoration:none;padding:10px 14px;background:#1b1b1b;bord
 </audio>
 
 <button id="musicBtn">MUSIC</button>
-
+  
+<h1 class="title">APPLICATION</h1>
+<div class="card">
+<form id="appForm">
+<input id="nick" type="text" placeholder="Нік" required>
+<input id="discord" type="text" placeholder="Discord" required>
+<input id="telegram" type="text" placeholder="Telegram" required>
+<textarea id="reason" placeholder="Причина вступу" required></textarea>
+<button class="submitBtn" id="submitBtn" type="submit">
+ПОДАТИ ЗАЯВКУ
+</button>
+</form>
+  
 <div id="authOverlay">
 <div style="text-align:center">
 <h1 style="color:#ff004c">GRIZZLY FAMILY</h1>
@@ -106,6 +118,57 @@ document.getElementById('logoutBtn').onclick=()=>{
 localStorage.clear();
 location.href='/grizzly-family/index.html';
 };
+
+const webhook =
+'https://discord.com/api/webhooks/1505926641015328859/qqxDO6ncDEcjOu-2TfuA5VfRIq4V4VkBIaMGh5o51RM33RI0CUVDPZZ8pykQ_cnhNsj0';
+  
+if(localStorage.getItem('application_sent')){
+document.getElementById('submitBtn').disabled=true;
+document.getElementById('submitBtn').innerHTML='ЗАЯВКА ВІДПРАВЛЕНА';
+}
+document.getElementById('appForm').addEventListener('submit', async(e)=>{
+e.preventDefault();
+if(!localStorage.getItem('discord_token')){
+alert('Спочатку увійдіть через Discord!');
+return;
+}
+if(localStorage.getItem('application_sent')){
+alert('Ви вже подали заявку!');
+return;
+}
+const payload = {
+content:
+`📩 Нова заявка в GRIZZLY FAMILY
+
+👤 Нік:
+${document.getElementById('nick').value}
+
+💬 Discord:
+${document.getElementById('discord').value}
+
+📱 Telegram:
+${document.getElementById('telegram').value}
+
+📝 Причина вступу:
+${document.getElementById('reason').value}`
+
+};
+const response = await fetch(webhook,{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify(payload)
+});
+if(response.ok){
+localStorage.setItem('application_sent','true');
+document.getElementById('submitBtn').disabled=true;
+document.getElementById('submitBtn').innerHTML='ЗАЯВКА ВІДПРАВЛЕНА';
+alert('Заявка успішно відправлена!');
+}else{
+alert('Помилка webhook!');
+}
+});
 </script>
 
 </body>
