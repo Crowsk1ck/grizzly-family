@@ -156,7 +156,7 @@ margin-top:20px;
 <div id="authOverlay">
 <div style="text-align:center">
 <h1 style="color:#ff004c">GRIZZLY FAMILY</h1>
-<a class="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=code&redirect_uri=https%3A%2F%2Fwww.grizzly-family.online%2F&scope=identify+email">LOGIN WITH DISCORD</a>
+<a class="loginBtn" href="https://discord.com/oauth2/authorize?client_id=1506029366008610856&response_type=token&redirect_uri=https%3A%2F%2Fwww.grizzly-family.online%2F&scope=identify%20email">LOGIN WITH DISCORD</a>
 </div>
 </div>
 
@@ -247,7 +247,10 @@ if(music.paused){music.play();}else{music.pause();}
 };
 
 const fragment=new URLSearchParams(window.location.hash.substring(1));
-const token=fragment.get('access_token');
+const token =
+new URLSearchParams(
+window.location.hash.substring(1)
+).get('access_token');
 
 async function loadProfile(tok){
 const response=await fetch('https://discord.com/api/users/@me',{
