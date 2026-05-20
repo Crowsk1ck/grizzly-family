@@ -268,6 +268,7 @@ placeholder="👑 Хто почав контракт">
 
 <input class="input"
 id="members"
+list="playersList"
 placeholder="👥 Учасники через крапку">
 
 <div style="
@@ -628,7 +629,7 @@ if(!players[n]){
 players[n] = 0;
 }
 
-players[n]++;
+players[n] += Number(data.amount || 0);
 
 });
 
@@ -702,7 +703,7 @@ ${medals[i] || '🏅'} ${p[0]}
 <div></div>
 
 <div class="green">
-${p[1]} контрактів
+$${p[1].toLocaleString()}
 </div>
 
 </div>
@@ -834,6 +835,19 @@ membersInput.setAttribute(
 );
 
 </script>
+
+
+
+<datalist id="playersList">
+
+<option value="Maryana Volodymyrivna">
+<option value="Zim Neffiltrovanuyi">
+<option value="Andrew Grizzly">
+<option value="Black Wolf">
+<option value="Grizzly Family">
+
+</datalist>
+
 
 </body>
 </html>
