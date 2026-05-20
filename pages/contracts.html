@@ -459,7 +459,7 @@ localStorage.getItem('contractsData') || '[]'
 
 let membersCount =
 members
-.split(',')
+.split('.')
 .filter(x=>x.trim()!=='')
 .length;
 
@@ -617,7 +617,7 @@ $${data.amount}
 `;
 
 (data.members || '')
-.split(',')
+.split('.')
 .forEach((n)=>{
 
 n = n.trim();
@@ -736,7 +736,7 @@ return;
 
 const membersCount =
 members
-.split(',')
+.split('.')
 .filter(x=>x.trim()!=='')
 .length;
 
