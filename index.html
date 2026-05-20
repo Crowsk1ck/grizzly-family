@@ -162,7 +162,7 @@ margin-top:20px;
 
 
 <nav>
-<a href="/index.html">Головна</a>
+<a href="/index.html">Інфо</a>
 <a href="/pages/team.html">Команда</a>
 <a href="/pages/gallery.html">Галерея</a>
 <a href="/pages/contracts.html">Контракти</a>
@@ -171,7 +171,7 @@ margin-top:20px;
 
 <div class="container">
 
-<h1 class="title"></h1>
+<h1 class="title">Інфо</h1>
 
 <div class="card">
 
@@ -261,6 +261,8 @@ if(!response.ok)return;
 const user=await response.json();
 
 localStorage.setItem('discord_token',tok);
+localStorage.setItem('discord_id',user.id);
+
 localStorage.setItem('discord_name',user.username);
 localStorage.setItem('discord_avatar',
 `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
