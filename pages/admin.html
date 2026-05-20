@@ -7,167 +7,98 @@
 <title>GRIZZLY ADMIN PANEL</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-font-family:Arial,sans-serif;
+margin:0;
+font-family:Arial;
 background:#050505;
 color:white;
-overflow-x:hidden;
 }
-.bgvideo{
-position:fixed;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(.15);
-z-index:-2;
-}
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.75);
-backdrop-filter:blur(4px);
-z-index:-1;
-}
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-display:flex;
-justify-content:center;
-gap:14px;
-padding:16px;
-background:rgba(0,0,0,.45);
-backdrop-filter:blur(14px);
-z-index:999;
-}
-nav a{
-padding:11px 18px;
-background:#171717;
-border-radius:14px;
-text-decoration:none;
-color:white;
-font-weight:700;
-}
+
 .wrapper{
-max-width:1500px;
+max-width:1200px;
 margin:auto;
-padding:120px 25px 40px;
+padding:40px;
 }
-.title{
-font-size:58px;
-font-weight:900;
-color:#ff004c;
-margin-bottom:30px;
-}
+
 .panel{
-background:linear-gradient(180deg,rgba(18,18,18,.96),rgba(10,10,10,.92));
-border:1px solid rgba(255,0,76,.18);
-border-radius:26px;
-padding:24px;
-backdrop-filter:blur(14px);
-box-shadow:0 0 30px rgba(255,0,76,.12);
+background:#111;
+border-radius:24px;
+padding:25px;
+border:1px solid rgba(255,0,76,.2);
 margin-bottom:20px;
 }
-.panelTitle{
-font-size:28px;
+
+.title{
+font-size:52px;
 font-weight:900;
-margin-bottom:24px;
 color:#ff004c;
+margin-bottom:25px;
 }
+
+.btn{
+padding:16px;
+width:100%;
+border:none;
+border-radius:14px;
+background:#ff004c;
+color:white;
+font-weight:900;
+cursor:pointer;
+margin-top:12px;
+}
+
 .input{
 width:100%;
 padding:16px;
-margin-bottom:15px;
-background:#111;
+background:#1a1a1a;
 border:none;
 border-radius:14px;
 color:white;
+margin-bottom:12px;
 }
-.btn{
-width:100%;
-padding:16px;
-border:none;
-border-radius:14px;
-background:linear-gradient(90deg,#ff004c,#ff2f6d);
-color:white;
-font-weight:900;
-cursor:pointer;
-margin-bottom:10px;
-}
-#discordProfile{
-position:fixed;
-top:90px;
-right:20px;
+
+#adminPanel{
 display:none;
-align-items:center;
-gap:12px;
-background:rgba(20,20,20,.95);
-padding:12px;
-border-radius:14px;
-z-index:9999;
 }
-#discordAvatar{
-width:50px;
-height:50px;
-border-radius:50%;
-border:2px solid #ff004c;
-}
-#logoutBtn{
-padding:8px 12px;
-border:none;
-border-radius:10px;
-background:#ff004c;
-color:white;
-cursor:pointer;
-}
+
 </style>
 </head>
+
 <body>
-
-<video class="bgvideo" autoplay muted loop>
-<source src="/assets/media/background.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
-
-<nav>
-<a href="/index.html">Інфо</a>
-<a href="/pages/team.html">Команда</a>
-<a href="/pages/gallery.html">Галерея</a>
-<a href="/pages/contracts.html">Контракти</a>
-</nav>
-
-<div id="discordProfile">
-<img id="discordAvatar">
-<div>
-<div id="discordName"></div>
-<button id="logoutBtn">LOGOUT</button>
-</div>
-</div>
 
 <div class="wrapper">
 
-<div class="title">GRIZZLY ADMIN PANEL</div>
+<div class="title">
+GRIZZLY ADMIN PANEL
+</div>
 
 <div id="accessDenied" class="panel">
-<div class="panelTitle">ACCESS DENIED</div>
+<h2>ACCESS DENIED</h2>
 <p>У вас немає доступу до ADMIN PANEL</p>
 </div>
 
-<div id="adminPanel" style="display:none">
+<div id="adminPanel">
 
 <div class="panel">
 
-<div class="panelTitle">ADMIN ACCESS</div>
+<h2>ADMIN TOOLS</h2>
 
-<p style="margin-bottom:20px">
-Ви успішно увійшли як ADMIN.
-</p>
+<input class="input"
+id="contractName"
+placeholder="Назва контракту">
 
-<button class="btn" onclick="clearPanel()">
+<input class="input"
+id="contractAmount"
+placeholder="Сума">
+
+<button class="btn"
+onclick="saveContract()">
+ЗБЕРЕГТИ КОНТРАКТ
+</button>
+
+<button class="btn"
+onclick="clearPanel()">
 ОЧИСТИТИ ПАНЕЛЬ
 </button>
 
@@ -177,48 +108,27 @@ cursor:pointer;
 
 </div>
 
-<script>
-const admins = [
-'511272056021581835'
-];
+<script type="module">
 
-function restoreProfile(){
+import {
+auth,
+db,
+collection,
+addDoc,
+getDocs,
+onAuthStateChanged
+} from "/assets/js/firebase.js";
 
-const name =
-localStorage.getItem('discord_name');
+const OWNER_ID =
+'511272056021581835';
 
-const avatar =
-localStorage.getItem('discord_avatar');
+onAuthStateChanged(auth, async(user)=>{
 
-if(name && avatar){
-
-document.getElementById(
-'discordProfile'
-).style.display='flex';
-
-document.getElementById(
-'discordName'
-).innerHTML=name;
-
-document.getElementById(
-'discordAvatar'
-).src=avatar;
-
+if(!user){
+return;
 }
 
-}
-
-restoreProfile();
-
-
-// TEMP ADMIN LOGIN
-// ПОКА БЕЗ DISCORD API
-
-const password = prompt(
-'Введіть пароль ADMIN PANEL'
-);
-
-if(password === 'grizzlyadmin'){
+if(user.uid){
 
 document.getElementById(
 'adminPanel'
@@ -228,42 +138,45 @@ document.getElementById(
 'accessDenied'
 ).style.display='none';
 
-}else{
-
-document.getElementById(
-'accessDenied'
-).style.display='block';
-
 }
 
+});
 
+window.saveContract = async()=>{
 
-function clearPanel(){
+const title =
+document.getElementById(
+'contractName'
+).value;
 
-if(!confirm('Очистити GRIZZLY PANEL?'))
+const amount =
+document.getElementById(
+'contractAmount'
+).value;
+
+if(!title || !amount){
+alert('Заповни поля');
 return;
-
-localStorage.removeItem('contracts');
-localStorage.removeItem('members');
-localStorage.removeItem('total');
-
-document.getElementById(
-'contractsTable'
-).innerHTML='';
-
-alert('PANEL CLEARED');
-
 }
 
+await addDoc(
+collection(db,'contracts'),
+{
+title,
+amount,
+created:Date.now()
+}
+);
 
+alert('Контракт збережено');
 
-document.getElementById(
-'logoutBtn'
-).onclick=()=>{
+};
+
+window.clearPanel = ()=>{
 
 localStorage.clear();
 
-location.href='/index.html';
+alert('PANEL CLEARED');
 
 };
 
