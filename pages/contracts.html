@@ -415,7 +415,7 @@ if(music.paused){music.play();}
 else{music.pause();}
 };
 
-async function sendContract(){
+async function oldSendContract(){
 
 const title =
 document.querySelectorAll('.input')[0].value;
@@ -630,6 +630,127 @@ localStorage.removeItem('discord_avatar');
 location.href='/index.html';
 
 };
+
+</script>
+
+
+<script type="module">
+
+import {
+db,
+collection,
+addDoc,
+getDocs,
+query,
+orderBy
+} from "/assets/js/firebase.js";
+
+async function loadContracts(){
+
+const snapshot = await getDocs(
+query(
+collection(db,'contracts'),
+orderBy('created','desc')
+)
+);
+
+let contracts = 0;
+let membersTotal = 0;
+let totalIncome = 0;
+
+document.getElementById(
+'contractsTable'
+).innerHTML='';
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+contracts++;
+
+membersTotal += Number(data.membersCount || 0);
+
+totalIncome += Number(data.amount || 0);
+
+document.getElementById(
+'contractsTable'
+).innerHTML += `
+
+<div class="row">
+<div>${data.title}</div>
+<div>${data.membersCount}</div>
+<div class="green">$${data.amount}</div>
+</div>
+
+`;
+
+});
+
+const average =
+contracts > 0
+? Math.floor(membersTotal / contracts)
+: 0;
+
+document.getElementById(
+'contractsCount'
+).innerText = contracts;
+
+document.getElementById(
+'membersCount'
+).innerText = average;
+
+document.getElementById(
+'totalIncome'
+).innerText =
+'$' + totalIncome.toLocaleString();
+
+document.getElementById(
+'netIncome'
+).innerText =
+'$' + Math.floor(totalIncome * 0.84).toLocaleString();
+
+}
+
+window.sendContract = async()=>{
+
+const title =
+document.querySelectorAll('.input')[0].value;
+
+const amount =
+document.querySelectorAll('.input')[1].value;
+
+const members =
+document.querySelectorAll('.input')[2].value;
+
+if(!title || !amount || !members){
+alert('Заповни всі поля');
+return;
+}
+
+const membersCount =
+members
+.split(',')
+.filter(x=>x.trim()!=='')
+.length;
+
+await addDoc(
+collection(db,'contracts'),
+{
+title:title,
+amount:Number(amount.replace(/\D/g,'')),
+members:members,
+membersCount:membersCount,
+created:Date.now()
+}
+);
+
+alert('Контракт збережено у Firebase');
+
+loadContracts();
+
+};
+
+loadContracts();
 
 </script>
 
