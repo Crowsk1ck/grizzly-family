@@ -549,9 +549,33 @@ document.getElementById(
 ).innerHTML += `
 
 <div class="row">
-<div>${data.title}</div>
-<div>${data.membersCount}</div>
-<div class="green">$${data.amount}</div>
+
+<div>
+
+${data.title}
+
+<br><br>
+
+<span style="
+color:#999;
+font-size:14px;
+line-height:1.7;
+">
+
+👥 ${data.members}
+
+</span>
+
+</div>
+
+<div>
+${data.membersCount}
+</div>
+
+<div class="green">
+$${data.amount}
+</div>
+
 </div>
 
 `;
