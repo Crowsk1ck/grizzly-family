@@ -752,6 +752,54 @@ created:Date.now()
 
 });
 
+await fetch(
+'https://discord.com/api/webhooks/1506424883737788619/yATAISypU22ZWVvhRKMsSeSZT1l7bghWRvPSoLaERM8tdj1Wx70JXq4QU2DjYwiHC72F',
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+
+embeds:[{
+
+title:'📄 Новий контракт',
+
+color:16711756,
+
+fields:[
+
+{
+name:'👑 Хто почав',
+value:startedBy,
+inline:true
+},
+
+{
+name:'💰 Сума',
+value:'$' + amount,
+inline:true
+},
+
+{
+name:'👥 Учасники',
+value:members
+}
+
+],
+
+footer:{
+text:'GRIZZLY FAMILY'
+}
+
+}]
+
+})
+
+});
+
+
+
 alert('Контракт збережено у Firebase');
 
 updateFirebaseContracts();
