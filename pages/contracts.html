@@ -253,10 +253,25 @@ placeholder="Назва контракту">
 placeholder="Сума">
 
 <input class="input" id="members"
-placeholder="Учасники через кому">
+placeholder="Кількісь людей">
 
-<input class="input" id="startedBy"
-placeholder="Хто почав контракт">
+<div style="
+margin-top:-5px;
+margin-bottom:15px;
+font-size:13px;
+color:#888;
+line-height:1.7;
+">
+
+Учасників розділяй крапкою.
+
+<br>
+
+Почни вводити ім’я вище —
+список гравців підтягнеться
+з довідника за алфавітом.
+
+</div>
 
 <button class="btn"
 onclick="sendContract()">
@@ -412,7 +427,7 @@ document.getElementById('amount').value;
 const members =
 document.getElementById('members').value;
 
-if(!title || !amount || !members || !startedBy){
+if(!title || !amount || !members){
 
 alert('Заповни всі поля');
 return;
@@ -565,11 +580,7 @@ font-size:14px;
 line-height:1.7;
 ">
 
-👑 Почав: ${data.startedBy}
-
-<br><br>
-
-👥 Учасники: ${data.members}
+👥 ${data.members}
 
 </span>
 
@@ -695,10 +706,7 @@ document.querySelectorAll('.input')[1].value;
 const members =
 document.querySelectorAll('.input')[2].value;
 
-const startedBy =
-document.getElementById('startedBy').value;
-
-if(!title || !amount || !members || !startedBy){
+if(!title || !amount || !members){
 
 alert('Заповни всі поля');
 return;
@@ -716,7 +724,6 @@ await db.collection('contracts').add({
 title:title,
 amount:Number(amount.replace(/\D/g,'')),
 members:members,
-startedBy:startedBy,
 membersCount:membersCount,
 created:Date.now()
 
@@ -761,6 +768,50 @@ updateFirebaseContracts();
 
 </script>
 
+
+
+<script>
+
+const playersList = [
+
+'Maryana Volodymyrivna',
+'Zim Neffiltrovanuyi',
+'Andrew Grizzly',
+'Black Wolf',
+'Neffiltrovanuyi',
+'Grizzly Family'
+
+];
+
+const membersInput =
+document.getElementById('members');
+
+const dataList =
+document.createElement('datalist');
+
+dataList.id = 'playersList';
+
+playersList
+.sort()
+.forEach((p)=>{
+
+const option =
+document.createElement('option');
+
+option.value = p;
+
+dataList.appendChild(option);
+
+});
+
+document.body.appendChild(dataList);
+
+membersInput.setAttribute(
+'list',
+'playersList'
+);
+
+</script>
 
 </body>
 </html>
