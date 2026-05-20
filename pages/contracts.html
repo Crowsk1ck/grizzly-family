@@ -504,6 +504,51 @@ alert('Контракт відправлено в Discord');
 
 }
 
+
+function clearPanel(){
+
+const password =
+prompt('Введи пароль');
+
+if(password !== 'grizzlyadmin'){
+
+alert('Невірний пароль');
+
+return;
+
+}
+
+if(!confirm('Очистити весь GRIZZLY PANEL?'))
+return;
+
+localStorage.removeItem('contracts');
+localStorage.removeItem('members');
+localStorage.removeItem('total');
+
+document.getElementById(
+'contractsCount'
+).innerText = 0;
+
+document.getElementById(
+'membersCount'
+).innerText = 0;
+
+document.getElementById(
+'totalIncome'
+).innerText = '$0';
+
+document.getElementById(
+'netIncome'
+).innerText = '$0';
+
+document.getElementById(
+'contractsTable'
+).innerHTML = '';
+
+alert('GRIZZLY PANEL очищено');
+
+}
+
 </script>
 
 </body>
