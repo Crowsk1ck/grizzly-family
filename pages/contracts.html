@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -7,7 +6,12 @@
 <title>GRIZZLY PANEL</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
 font-family:Arial,sans-serif;
@@ -29,13 +33,7 @@ z-index:-2;
 .overlay{
 position:fixed;
 inset:0;
-background:linear-gradient(
-90deg,
-rgba(0,0,0,.92),
-rgba(0,0,0,.72),
-rgba(0,0,0,.92)
-);
-backdrop-filter:blur(4px);
+background:rgba(0,0,0,.75);
 z-index:-1;
 }
 
@@ -46,30 +44,23 @@ left:0;
 width:100%;
 display:flex;
 justify-content:center;
-gap:14px;
-padding:16px;
-background:rgba(0,0,0,.45);
-backdrop-filter:blur(14px);
+gap:12px;
+padding:15px;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
 z-index:999;
 }
 
 nav a{
-padding:11px 18px;
-background:#171717;
-border-radius:14px;
-text-decoration:none;
 color:white;
-font-weight:700;
-transition:.3s;
-}
-
-nav a:hover{
-background:#ff004c;
-transform:translateY(-2px);
+text-decoration:none;
+padding:10px 16px;
+background:#151515;
+border-radius:10px;
 }
 
 .wrapper{
-max-width:1600px;
+max-width:1500px;
 margin:auto;
 padding:120px 25px 40px;
 }
@@ -85,34 +76,27 @@ margin-bottom:30px;
 display:grid;
 grid-template-columns:420px 1fr;
 gap:22px;
-align-items:start;
 }
 
 .panel{
-background:linear-gradient(
-180deg,
-rgba(18,18,18,.96),
-rgba(10,10,10,.92)
-);
-border:1px solid rgba(255,0,76,.18);
-border-radius:26px;
+background:#121212;
 padding:24px;
-backdrop-filter:blur(14px);
-box-shadow:0 0 30px rgba(255,0,76,.12);
+border-radius:24px;
+border:1px solid rgba(255,0,76,.15);
 }
 
 .panelTitle{
 font-size:28px;
 font-weight:900;
-margin-bottom:24px;
 color:#ff004c;
+margin-bottom:24px;
 }
 
 .input{
 width:100%;
 padding:16px;
 margin-bottom:15px;
-background:#111;
+background:#1a1a1a;
 border:none;
 border-radius:14px;
 color:white;
@@ -123,10 +107,11 @@ width:100%;
 padding:16px;
 border:none;
 border-radius:14px;
-background:linear-gradient(90deg,#ff004c,#ff2f6d);
+background:#ff004c;
 color:white;
 font-weight:900;
 cursor:pointer;
+margin-top:10px;
 }
 
 .statGrid{
@@ -173,55 +158,17 @@ color:#00ff95;
 font-weight:900;
 }
 
-.history{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:18px;
-margin-top:20px;
-}
-
-.historyCard{
-padding:22px;
-border-radius:22px;
-background:#111;
-}
-
-.historyCard h3{
-font-size:22px;
-margin-bottom:12px;
-color:#ff004c;
-}
-
-#musicBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-padding:13px 18px;
-border:none;
-border-radius:14px;
-background:#ff004c;
-color:white;
-font-weight:800;
-cursor:pointer;
-z-index:999;
-}
-
-@media(max-width:1200px){
-.dashboard{grid-template-columns:1fr;}
-}
-
 #discordProfile{
 position:fixed;
 top:90px;
 right:20px;
-display:none;
+display:flex;
 align-items:center;
 gap:12px;
 background:rgba(20,20,20,.95);
 padding:12px;
 border-radius:14px;
 z-index:9999;
-border:1px solid rgba(255,0,76,.18);
 }
 
 #discordAvatar{
@@ -238,7 +185,19 @@ border-radius:10px;
 background:#ff004c;
 color:white;
 cursor:pointer;
-margin-top:5px;
+}
+
+#musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:12px 16px;
+border:none;
+border-radius:10px;
+background:#ff004c;
+color:white;
+cursor:pointer;
+z-index:9999;
 }
 
 </style>
@@ -259,13 +218,13 @@ margin-top:5px;
 <button id="musicBtn">MUSIC</button>
 
 <div id="discordProfile">
-<img id="discordAvatar">
+<img id="discordAvatar"
+src="https://cdn.discordapp.com/embed/avatars/0.png">
 <div>
-<div id="discordName"></div>
+<div id="discordName">GRIZZLY USER</div>
 <button id="logoutBtn">LOGOUT</button>
 </div>
 </div>
-
 
 <nav>
 <a href="/index.html">Інфо</a>
@@ -283,22 +242,37 @@ margin-top:5px;
 
 <div class="panel">
 
-<div class="panelTitle">ДОДАТИ КОНТРАКТ</div>
+<div class="panelTitle">
+ДОДАТИ КОНТРАКТ
+</div>
 
-<input class="input" placeholder="Назва контракту">
-<input class="input" placeholder="Сума">
-<input class="input" placeholder="Учасники">
+<input class="input" id="title"
+placeholder="Назва контракту">
 
-<button class="btn" onclick="sendContract()">ДОДАТИ КОНТРАКТ</button>
+<input class="input" id="amount"
+placeholder="Сума">
+
+<input class="input" id="members"
+placeholder="Учасники через кому">
+
+<button class="btn"
+onclick="sendContract()">
+ДОДАТИ КОНТРАКТ
+</button>
+
+<button class="btn"
+style="background:#222"
+onclick="clearPanel()">
+ОЧИСТИТИ ПАНЕЛЬ
+</button>
 
 </div>
 
-<div>
-
 <div class="panel">
 
-<div class="panelTitle">СТАТИСТИКА</div>
-
+<div class="panelTitle">
+СТАТИСТИКА
+</div>
 
 <div class="statGrid">
 
@@ -326,10 +300,9 @@ margin-top:5px;
 
 <div class="table">
 
-
 <div class="row rowHeader">
-<div>ГРАВЕЦЬ</div>
-<div>КОНТРАКТИ</div>
+<div>КОНТРАКТ</div>
+<div>УЧАСНИКИ</div>
 <div>ДОХІД</div>
 </div>
 
@@ -339,379 +312,77 @@ margin-top:5px;
 
 </div>
 
-<div class="history">
-
-<div class="historyCard">
-<h3>ЛІНІЯ РЕМОНТУ</h3>
-<p>👤 Maryana Grizzly</p>
-<br>
-<p class="green">$120000</p>
-</div>
-
-<div class="historyCard">
-<h3>ДОСТАВКА OG KUSH</h3>
-<p>👤 Zim Neffiltrovanuyi</p>
-<br>
-<p class="green">$260000</p>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div>
 
 <script>
 
-window.onload=()=>{
-
-let savedContracts =
-parseInt(localStorage.getItem('contracts')) || 0;
-
-let savedMembers =
-parseInt(localStorage.getItem('members')) || 0;
-
-let savedTotal =
-parseInt(localStorage.getItem('total')) || 0;
-
-let averageMembers =
-savedContracts > 0
-? Math.floor(savedMembers / savedContracts)
-: 0;
-
-document.getElementById('contractsCount').innerText =
-savedContracts;
-
-document.getElementById('membersCount').innerText =
-averageMembers;
-
-document.getElementById('totalIncome').innerText =
-'$' + savedTotal.toLocaleString();
-
-document.getElementById('netIncome').innerText =
-'$' + Math.floor(savedTotal * 0.84).toLocaleString();
-
-};
-
-
-const music=document.getElementById('bgmusic');
-
-document.addEventListener('click',()=>{
-music.play();
-},{once:true});
-
-if(localStorage.getItem('music_time')){
-music.currentTime=parseFloat(localStorage.getItem('music_time'));
-}
-
-music.addEventListener('timeupdate',()=>{
-localStorage.setItem('music_time',music.currentTime);
-});
-
-document.getElementById('musicBtn').onclick=()=>{
-if(music.paused){music.play();}
-else{music.pause();}
-};
-
-async function oldSendContract(){
-
-const title =
-document.querySelectorAll('.input')[0].value;
-
-const amount =
-document.querySelectorAll('.input')[1].value;
-
-const members =
-document.querySelectorAll('.input')[2].value;
-
-if(!title || !amount || !members){
-
-alert('Заповни всі поля');
-
-return;
-
-}
-
-const payload = {
-
-embeds:[{
-
-title:'📄 НОВИЙ КОНТРАКТ',
-
-color:0xff004c,
-
-fields:[
-
-{
-name:'📌 Назва',
-value:title,
-inline:false
-},
-
-{
-name:'💰 Сума',
-value:amount,
-inline:true
-},
-
-{
-name:'👥 Учасники',
-value:members,
-inline:true
-}
-
-],
-
-footer:{
-text:'GRIZZLY FAMILY PANEL'
-},
-
-timestamp:new Date()
-
-}]
-
-};
-
-await fetch(
-'https://discord.com/api/webhooks/1506424883737788619/yATAISypU22ZWVvhRKMsSeSZT1l7bghWRvPSoLaERM8tdj1Wx70JXq4QU2DjYwiHC72F',
-{
-method:'POST',
-headers:{
-'Content-Type':'application/json'
-},
-body:JSON.stringify(payload)
-}
-);
-
-
-let contracts =
-parseInt(localStorage.getItem('contracts') || 0);
-
-let membersCountTotal =
-parseInt(localStorage.getItem('members') || 0);
-
-let total =
-parseInt(localStorage.getItem('total') || 0);
-
-contracts += 1;
-
-let currentMembers =
-members
-.split(',')
-.filter(x=>x.trim()!=='')
-.length;
-
-membersCountTotal += currentMembers;
-
-total += parseInt(amount.replace(/\D/g,'')) || 0;
-
-let net = Math.floor(total * 0.84);
-
-localStorage.setItem('contracts',contracts);
-localStorage.setItem('members',membersCountTotal);
-localStorage.setItem('total',total);
-
-let averageMembers =
-contracts > 0
-? Math.floor(membersCountTotal / contracts)
-: 0;
-
-document.getElementById('contractsCount').innerText =
-contracts;
-
-document.getElementById('membersCount').innerText =
-averageMembers;
-
-document.getElementById('totalIncome').innerText =
-'$' + total.toLocaleString();
-
-document.getElementById('netIncome').innerText =
-'$' + net.toLocaleString();
-
-document.getElementById('contractsTable').innerHTML += `
-
-<div class="row">
-<div>${title}</div>
-<div>${currentMembers}</div>
-<div class="green">$${amount}</div>
-</div>
-
-`;
-
-alert('Контракт відправлено в Discord');
-
-
-}
-
-
-function clearPanel(){
-
-const password =
-prompt('Введи пароль');
-
-if(password !== 'grizzlyadmin'){
-
-alert('Невірний пароль');
-
-return;
-
-}
-
-if(!confirm('Очистити весь GRIZZLY PANEL?'))
-return;
-
-localStorage.removeItem('contracts');
-localStorage.removeItem('members');
-localStorage.removeItem('total');
+const music =
+document.getElementById('bgmusic');
 
 document.getElementById(
-'contractsCount'
-).innerText = 0;
-
-document.getElementById(
-'membersCount'
-).innerText = 0;
-
-document.getElementById(
-'totalIncome'
-).innerText = '$0';
-
-document.getElementById(
-'netIncome'
-).innerText = '$0';
-
-document.getElementById(
-'contractsTable'
-).innerHTML = '';
-
-alert('GRIZZLY PANEL очищено');
-
-}
-
-
-function restoreProfile(){
-
-const name =
-localStorage.getItem('discord_name');
-
-const avatar =
-localStorage.getItem('discord_avatar');
-
-if(name && avatar){
-
-document.getElementById(
-'discordProfile'
-).style.display='flex';
-
-document.getElementById(
-'discordName'
-).innerHTML=name;
-
-document.getElementById(
-'discordAvatar'
-).src=avatar;
-
-}
-
-}
-
-restoreProfile();
-
-document.getElementById (
-'logoutBtn'
+'musicBtn'
 ).onclick=()=>{
 
-localStorage.removeItem('discord_token');
-localStorage.removeItem('discord_name');
-localStorage.removeItem('discord_avatar');
-
-location.href='/index.html';
-
-};
-
-</script>
-
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-<script>
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyBxi9jixmJPGWodjLaNlY3oXeHvOGzQtlc",
-
-authDomain: "grizzly-6c924.firebaseapp.com",
-
-projectId: "grizzly-6c924",
-
-storageBucket: "grizzly-6c924.firebasestorage.app",
-
-messagingSenderId: "1098522296641",
-
-appId: "1:1098522296641:web:1fac71feda4e7ad9a8e1c0",
-
-measurementId: "G-GPLGFK68VD"
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
 
 };
 
-firebase.initializeApp(firebaseConfig);
+function updateStats(){
 
-const db = firebase.firestore();
+let contracts =
+JSON.parse(
+localStorage.getItem('contractsData') || '[]'
+);
 
-async function loadContracts(){
+let totalContracts =
+contracts.length;
 
-const snapshot = await db
-.collection('contracts')
-.orderBy('created','desc')
-.get();
-
-let contracts = 0;
-let membersTotal = 0;
 let totalIncome = 0;
+let totalMembers = 0;
 
 document.getElementById(
 'contractsTable'
 ).innerHTML='';
 
-snapshot.forEach((doc)=>{
+contracts.forEach((c)=>{
 
-const data = doc.data();
-
-contracts++;
-
-membersTotal += Number(data.membersCount || 0);
-
-totalIncome += Number(data.amount || 0);
+totalIncome += Number(c.amount);
+totalMembers += Number(c.membersCount);
 
 document.getElementById(
 'contractsTable'
 ).innerHTML += `
 
 <div class="row">
-<div>${data.title}</div>
-<div>${data.membersCount}</div>
-<div class="green">$${data.amount}</div>
+<div>${c.title}</div>
+<div>${c.membersCount}</div>
+<div class="green">$${c.amount}</div>
 </div>
 
 `;
 
 });
 
-const average =
-contracts > 0
-? Math.floor(membersTotal / contracts)
+let average =
+totalContracts > 0
+? Math.floor(totalMembers / totalContracts)
 : 0;
 
 document.getElementById(
 'contractsCount'
-).innerText = contracts;
+).innerText =
+totalContracts;
 
 document.getElementById(
 'membersCount'
-).innerText = average;
+).innerText =
+average;
 
 document.getElementById(
 'totalIncome'
@@ -725,16 +396,18 @@ document.getElementById(
 
 }
 
-window.sendContract = async()=>{
+updateStats();
+
+window.sendContract = ()=>{
 
 const title =
-document.querySelectorAll('.input')[0].value;
+document.getElementById('title').value;
 
 const amount =
-document.querySelectorAll('.input')[1].value;
+document.getElementById('amount').value;
 
 const members =
-document.querySelectorAll('.input')[2].value;
+document.getElementById('members').value;
 
 if(!title || !amount || !members){
 
@@ -743,29 +416,95 @@ return;
 
 }
 
-const membersCount =
+let contracts =
+JSON.parse(
+localStorage.getItem('contractsData') || '[]'
+);
+
+let membersCount =
 members
 .split(',')
 .filter(x=>x.trim()!=='')
 .length;
 
-await db.collection('contracts').add({
+contracts.push({
 
 title:title,
 amount:Number(amount.replace(/\D/g,'')),
-members:members,
-membersCount:membersCount,
-created:Date.now()
+membersCount:membersCount
 
 });
 
-alert('Контракт збережено у Firebase');
+localStorage.setItem(
+'contractsData',
+JSON.stringify(contracts)
+);
 
-loadContracts();
+updateStats();
+
+alert('Контракт додано');
 
 };
 
-loadContracts();
+window.clearPanel = ()=>{
+
+const password =
+prompt('Введи пароль');
+
+if(password !== 'grizzlyadmin'){
+
+alert('Невірний пароль');
+return;
+
+}
+
+localStorage.removeItem(
+'contractsData'
+);
+
+updateStats();
+
+alert('GRIZZLY PANEL очищено');
+
+};
+
+function restoreProfile(){
+
+const name =
+localStorage.getItem('discord_name');
+
+const avatar =
+localStorage.getItem('discord_avatar');
+
+if(name){
+
+document.getElementById(
+'discordName'
+).innerHTML=name;
+
+}
+
+if(avatar){
+
+document.getElementById(
+'discordAvatar'
+).src=avatar;
+
+}
+
+}
+
+restoreProfile();
+
+document.getElementById(
+'logoutBtn'
+).onclick=()=>{
+
+localStorage.clear();
+
+location.href='/index.html';
+
+};
 
 </script>
 
