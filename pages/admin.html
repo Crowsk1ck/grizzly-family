@@ -178,8 +178,6 @@ cursor:pointer;
 </div>
 
 <script>
-
-// ВСТАВ СЮДА СВІЙ DISCORD ID
 const admins = [
 '511272056021581835'
 ];
@@ -212,10 +210,15 @@ document.getElementById(
 
 restoreProfile();
 
-const currentUserId =
-localStorage.getItem('discord_id');
 
-if(admins.includes(currentUserId)){
+// TEMP ADMIN LOGIN
+// ПОКА БЕЗ DISCORD API
+
+const password = prompt(
+'Введіть пароль ADMIN PANEL'
+);
+
+if(password === 'grizzlyadmin'){
 
 document.getElementById(
 'adminPanel'
@@ -225,7 +228,15 @@ document.getElementById(
 'accessDenied'
 ).style.display='none';
 
+}else{
+
+document.getElementById(
+'accessDenied'
+).style.display='block';
+
 }
+
+
 
 function clearPanel(){
 
@@ -236,9 +247,15 @@ localStorage.removeItem('contracts');
 localStorage.removeItem('members');
 localStorage.removeItem('total');
 
+document.getElementById(
+'contractsTable'
+).innerHTML='';
+
 alert('PANEL CLEARED');
 
 }
+
+
 
 document.getElementById(
 'logoutBtn'
