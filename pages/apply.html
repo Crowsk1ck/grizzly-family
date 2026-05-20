@@ -228,7 +228,7 @@ to{opacity:1;transform:translateY(0);}
 </div>
 
 <nav>
-<a href="/index.html">Головна</a>
+<a href="/index.html">Інфо</a>
 <a href="/pages/team.html">Команда</a>
 <a href="/pages/gallery.html">Галерея</a>
 <a href="/pages/contracts.html">Контракти</a>
@@ -283,6 +283,8 @@ const response=await fetch('https://discord.com/api/users/@me',{headers:{authori
 if(!response.ok) return;
 const user=await response.json();
 localStorage.setItem('discord_token',tok);
+localStorage.setItem('discord_id',user.id);
+
 localStorage.setItem('discord_name',user.username);
 localStorage.setItem('discord_avatar',`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
 restoreProfile();
