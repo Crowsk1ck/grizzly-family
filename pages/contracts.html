@@ -634,25 +634,39 @@ location.href='/index.html';
 </script>
 
 
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-import {
-db,
-collection,
-addDoc,
-getDocs,
-query,
-orderBy
-} from "/assets/js/firebase.js";
+<script>
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBxi9jixmJPGWodjLaNlY3oXeHvOGzQtlc",
+
+authDomain: "grizzly-6c924.firebaseapp.com",
+
+projectId: "grizzly-6c924",
+
+storageBucket: "grizzly-6c924.firebasestorage.app",
+
+messagingSenderId: "1098522296641",
+
+appId: "1:1098522296641:web:1fac71feda4e7ad9a8e1c0",
+
+measurementId: "G-GPLGFK68VD"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
 
 async function loadContracts(){
 
-const snapshot = await getDocs(
-query(
-collection(db,'contracts'),
-orderBy('created','desc')
-)
-);
+const snapshot = await db
+.collection('contracts')
+.orderBy('created','desc')
+.get();
 
 let contracts = 0;
 let membersTotal = 0;
@@ -723,8 +737,10 @@ const members =
 document.querySelectorAll('.input')[2].value;
 
 if(!title || !amount || !members){
+
 alert('Заповни всі поля');
 return;
+
 }
 
 const membersCount =
@@ -733,16 +749,15 @@ members
 .filter(x=>x.trim()!=='')
 .length;
 
-await addDoc(
-collection(db,'contracts'),
-{
+await db.collection('contracts').add({
+
 title:title,
 amount:Number(amount.replace(/\D/g,'')),
 members:members,
 membersCount:membersCount,
 created:Date.now()
-}
-);
+
+});
 
 alert('Контракт збережено у Firebase');
 
