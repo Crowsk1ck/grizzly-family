@@ -1,3 +1,4 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -33,17 +34,13 @@ measurementId: "G-GPLGFK68VD"
 
 };
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export const auth =
-getAuth(app);
+export const auth = getAuth(app);
 
-export const provider =
-new GoogleAuthProvider();
+export const provider = new GoogleAuthProvider();
 
-export const db =
-getFirestore(app);
+export const db = getFirestore(app);
 
 export {
 signInWithPopup,
