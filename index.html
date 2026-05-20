@@ -6,6 +6,62 @@
 <title>Інфо</title>
 
 <style>
+  <script type="module">
+
+import {
+auth,
+provider,
+signInWithPopup,
+onAuthStateChanged,
+signOut
+} from "/assets/js/firebase.js";
+
+const loginBtn =
+document.getElementById('loginBtn');
+
+loginBtn.onclick = async()=>{
+
+const result =
+await signInWithPopup(
+auth,
+provider
+);
+
+const user = result.user;
+
+localStorage.setItem(
+'firebase_uid',
+user.uid
+);
+
+localStorage.setItem(
+'firebase_name',
+user.displayName
+);
+
+localStorage.setItem(
+'firebase_avatar',
+user.photoURL
+);
+
+location.reload();
+
+};
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+console.log(
+'LOGGED:',
+user.displayName
+);
+
+}
+
+});
+
+</script>
 body{
 margin:0;
 font-family:Arial,sans-serif;
