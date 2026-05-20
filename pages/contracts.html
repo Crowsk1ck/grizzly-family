@@ -258,25 +258,26 @@ z-index:999;
 
 <div class="panelTitle">СТАТИСТИКА</div>
 
+
 <div class="statGrid">
 
 <div class="stat">
-<h2>36</h2>
+<h2 id="contractsCount">0</h2>
 <p>КОНТРАКТІВ</p>
 </div>
 
 <div class="stat">
-<h2>122</h2>
-<p>УЧАСНИКІВ</p>
+<h2 id="membersCount">0</h2>
+<p>СЕРЕДНЯ КІЛЬКІСТЬ УЧАСНИКІВ</p>
 </div>
 
 <div class="stat">
-<h2>$5815000</h2>
+<h2 id="totalIncome">$0</h2>
 <p>ЗАГАЛЬНИЙ ДОХІД</p>
 </div>
 
 <div class="stat">
-<h2>$4903500</h2>
+<h2 id="netIncome">$0</h2>
 <p>ЧИСТИЙ ДОХІД</p>
 </div>
 
@@ -284,23 +285,14 @@ z-index:999;
 
 <div class="table">
 
+
 <div class="row rowHeader">
 <div>ГРАВЕЦЬ</div>
 <div>КОНТРАКТИ</div>
 <div>ДОХІД</div>
 </div>
 
-<div class="row">
-<div>Maryana Grizzly</div>
-<div>30</div>
-<div class="green">$1657057</div>
-</div>
-
-<div class="row">
-<div>Zim Neffiltrovanuyi</div>
-<div>14</div>
-<div class="green">$402230</div>
-</div>
+<div id="contractsTable"></div>
 
 </div>
 
@@ -331,6 +323,38 @@ z-index:999;
 </div>
 
 <script>
+
+window.onload=()=>{
+
+let savedContracts =
+parseInt(localStorage.getItem('contracts')) || 0;
+
+let savedMembers =
+parseInt(localStorage.getItem('members')) || 0;
+
+let savedTotal =
+parseInt(localStorage.getItem('total')) || 0;
+
+let averageMembers =
+savedContracts > 0
+? Math.floor(savedMembers / savedContracts)
+: 0;
+
+document.getElementById('contractsCount').innerText =
+savedContracts;
+
+document.getElementById('membersCount').innerText =
+averageMembers;
+
+document.getElementById('totalIncome').innerText =
+'$' + savedTotal.toLocaleString();
+
+document.getElementById('netIncome').innerText =
+'$' + Math.floor(savedTotal * 0.84).toLocaleString();
+
+};
+
+
 const music=document.getElementById('bgmusic');
 
 document.addEventListener('click',()=>{
@@ -420,7 +444,63 @@ body:JSON.stringify(payload)
 }
 );
 
+
+let contracts =
+parseInt(localStorage.getItem('contracts') || 0);
+
+let membersCountTotal =
+parseInt(localStorage.getItem('members') || 0);
+
+let total =
+parseInt(localStorage.getItem('total') || 0);
+
+contracts += 1;
+
+let currentMembers =
+members
+.split(',')
+.filter(x=>x.trim()!=='')
+.length;
+
+membersCountTotal += currentMembers;
+
+total += parseInt(amount.replace(/\D/g,'')) || 0;
+
+let net = Math.floor(total * 0.84);
+
+localStorage.setItem('contracts',contracts);
+localStorage.setItem('members',membersCountTotal);
+localStorage.setItem('total',total);
+
+let averageMembers =
+contracts > 0
+? Math.floor(membersCountTotal / contracts)
+: 0;
+
+document.getElementById('contractsCount').innerText =
+contracts;
+
+document.getElementById('membersCount').innerText =
+averageMembers;
+
+document.getElementById('totalIncome').innerText =
+'$' + total.toLocaleString();
+
+document.getElementById('netIncome').innerText =
+'$' + net.toLocaleString();
+
+document.getElementById('contractsTable').innerHTML += `
+
+<div class="row">
+<div>${title}</div>
+<div>${currentMembers}</div>
+<div class="green">$${amount}</div>
+</div>
+
+`;
+
 alert('Контракт відправлено в Discord');
+
 
 }
 
