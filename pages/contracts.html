@@ -249,18 +249,36 @@ src="https://cdn.discordapp.com/embed/avatars/0.png">
 <input class="input" id="title"
 placeholder="Назва контракту">
 
-<input class="input" id="amount"
-placeholder="Сума">
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-bottom:15px;
+">
 
-<input class="input" id="members"
-placeholder="Кількісь людей">
+<input class="input"
+id="amount"
+placeholder="💰 Сума">
+
+<input class="input"
+id="startedBy"
+placeholder="👑 Хто почав контракт">
+
+</div>
+
+<input class="input"
+id="members"
+placeholder="👥 Учасники через крапку">
 
 <div style="
-margin-top:-5px;
-margin-bottom:15px;
-font-size:13px;
+background:#151515;
+border:1px solid rgba(255,0,76,.15);
+padding:16px;
+border-radius:14px;
+margin-bottom:20px;
+font-size:14px;
 color:#888;
-line-height:1.7;
+line-height:1.8;
 ">
 
 Учасників розділяй крапкою.
@@ -427,7 +445,7 @@ document.getElementById('amount').value;
 const members =
 document.getElementById('members').value;
 
-if(!title || !amount || !members){
+if(!title || !amount || !members || !startedBy){
 
 alert('Заповни всі поля');
 return;
@@ -706,7 +724,10 @@ document.querySelectorAll('.input')[1].value;
 const members =
 document.querySelectorAll('.input')[2].value;
 
-if(!title || !amount || !members){
+const startedBy =
+document.getElementById('startedBy').value;
+
+if(!title || !amount || !members || !startedBy){
 
 alert('Заповни всі поля');
 return;
@@ -724,6 +745,7 @@ await db.collection('contracts').add({
 title:title,
 amount:Number(amount.replace(/\D/g,'')),
 members:members,
+startedBy:startedBy,
 membersCount:membersCount,
 created:Date.now()
 
