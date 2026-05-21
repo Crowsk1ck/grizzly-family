@@ -557,8 +557,16 @@ location.href='/index.html';
 
 async function updateFirebaseContracts(){
 
+const currentMonth =
+new Date().getMonth();
+
+const currentYear =
+new Date().getFullYear();
+
 const snapshot = await db
 .collection('contracts')
+.where('month','==',currentMonth)
+.where('year','==',currentYear)
 .orderBy('created','desc')
 .get();
 
@@ -630,7 +638,7 @@ if(!players[n]){
 players[n] = 0;
 }
 
-players[n] += Number(data.amount || 0);
+players[n]++;
 
 });
 
@@ -704,7 +712,7 @@ ${medals[i] || '🏅'} ${p[0]}
 <div></div>
 
 <div class="green">
-$${p[1].toLocaleString()}
+${p[1]} контрактів
 </div>
 
 </div>
@@ -749,7 +757,10 @@ amount:Number(amount.replace(/\D/g,'')),
 members:members,
 startedBy:startedBy,
 membersCount:membersCount,
-created:Date.now()
+created:Date.now(),
+
+month:new Date().getMonth(),
+year:new Date().getFullYear()
 
 });
 
